@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Finder</title>
+  <title>Movie Wizard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body id="loginPage">
 
-<!-- 🔐 LOGIN PAGE -->
+<!--  LOGIN PAGE -->
 <div id="loginSection" class="container">
   <h2>Login</h2>
   <input type="text" id="username" placeholder="Username or Email"><br>
   <input type="password" id="password" placeholder="Password"><br>
   <button onclick="login()">Login</button>
-  <p id="errorMsg"></p>
+  <p id="errorMsg" class="error"></p>
 </div>
 
-<!-- 🎬 MOVIE PAGE -->
+<!--  MOVIE PAGE -->
 <div id="movieSection" class="hidden">
 
   <div class="topbar">
-    <h1>🎬 Movie Finder</h1>
+    <h1>🎬 Movie Wizard</h1>
     <button onclick="logout()">Logout</button>
   </div>
 
@@ -57,35 +57,30 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 function login() {
-  const user = document.getElementById('username').value.trim();
-  const pass = document.getElementById('password').value.trim();
-  const error = document.getElementById('errorMsg');
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorMsg = document.getElementById('errorMsg');
 
-  error.textContent = "";
+  errorMsg.textContent = "";
 
-  if (!user || !pass) {
-    error.textContent = "Please enter both username/email and password";
+  if (!username || !password) {
+    errorMsg.textContent = "Please enter both username and password.";
     return;
   }
 
-  if (user.includes("@")) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(user)) {
-      error.textContent = "Invalid email format";
-      return;
-    }
+  // Demo login
+  if ((username === "test@example.com" || username === "test") && password === "1234") {
+    
+    //  SWITCH TO MOVIE PAGE
+    document.body.id = "moviePage";
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('movieSection').classList.remove('hidden');
+
+    getCategory('popular');
+
+  } else {
+    errorMsg.textContent = "Invalid username or password.";
   }
-
-  if (pass.length < 4) {
-    error.textContent = "Password must be at least 4 characters";
-    return;
-  }
-
-  document.body.id = "moviePage";
-  document.getElementById('loginSection').classList.add('hidden');
-  document.getElementById('movieSection').classList.remove('hidden');
-
-  getCategory('popular');
 }
 
 function logout() {

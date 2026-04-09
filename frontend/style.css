@@ -17,7 +17,6 @@ body {
   justify-content: center;
   align-items: center;
 
-  /* 🎬 Cinematic movie background with red/yellow tones */
   background: 
     linear-gradient(rgba(255,255,255,0.3), rgba(47,66,147,0.3)),
     url('https://t3.ftcdn.net/jpg/04/85/87/10/360_F_485871039_1nvre3LHbspbtEDmXFZwkfkm3dbmBR7Z.jpg')
@@ -60,6 +59,11 @@ body {
 
 #loginPage button:hover {
   background: #D22D2D;
+}
+
+#loginPage .error{
+  color: white;
+  margin-top: 10px;
 }
 
 /* ===== MOVIE PAGE ===== */
