@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Wizard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
+<body id="loginPage">
+
+<!--  LOGIN PAGE -->
+<div id="loginSection" class="container">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username or Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+  <p id="errorMsg" class="error"></p>
+</div>
+
+<!--  MOVIE PAGE -->
+<div id="movieSection" class="hidden">
+
+  <div class="topbar">
+    <h1>🎬 Movie Wizard</h1>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search movies...">
+    <button onclick="searchMovies()">Search</button>
+  </div>
+
+  <div class="categories">
+    <button onclick="getCategory('popular')">Popular</button>
+    <button onclick="getCategory('top_rated')">Top Rated</button>
+    <button onclick="getCategory('upcoming')">Upcoming</button>
+  </div>
+
+  <div id="movies" class="movie-grid"></div>
+
+</div>
+
+<script>
+const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
+
+// ===== TMDB API LINKS =====
+// Search: https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=KEYWORD
+// Popular: https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
+// Top Rated: https://api.themoviedb.org/3/movie/top_rated?api_key=YOUR_API_KEY
+// Upcoming: https://api.themoviedb.org/3/movie/upcoming?api_key=YOUR_API_KEY
+// Genres: https://api.themoviedb.org/3/genre/movie/list?api_key=YOUR_API_KEY
+// Discover: https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&with_genres=GENRE_ID
+// Images: https://image.tmdb.org/t/p/w500 + poster_path
+
+const BASE_URL = "https://api.themoviedb.org/3";
+const IMG_URL = "https://image.tmdb.org/t/p/w500";
+
+function login() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorMsg = document.getElementById('errorMsg');
+
+  errorMsg.textContent = "";
+
+  if (!username || !password) {
+    errorMsg.textContent = "Please enter both username and password.";
+    return;
+  }
+
+  // Demo login
+  if ((username === "test@example.com" || username === "test") && password === "1234") {
+    
+    //  SWITCH TO MOVIE PAGE
+    document.body.id = "moviePage";
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('movieSection').classList.remove('hidden');
+
+    getCategory('popular');
+
+  } else {
+    errorMsg.textContent = "Invalid username or password.";
+  }
+}
+
+function logout() {
+  location.reload();
+}
+
+async function searchMovies() {
+  const query = document.getElementById("search").value.trim();
+  if (!query) return;
+
+  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
+  const data = await res.json();
+  displayMovies(data.results);
+}
+
+async function getCategory(type) {
+  const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
+  const data = await res.json();
+  displayMovies(data.results);
+}
+
+function displayMovies(movies) {
+  const container = document.getElementById("movies");
+  container.innerHTML = "";
+
+  movies.forEach(movie => {
+    const poster = movie.poster_path
+      ? IMG_URL + movie.poster_path
+      : "https://via.placeholder.com/300x450?text=No+Image";
+
+    const div = document.createElement("div");
+    div.classList.add("movie");
+
+    div.innerHTML = `
+      <img src="${poster}">
+      <div class="movie-info">
+        <h4>${movie.title}</h4>
+        <p>⭐ ${movie.vote_average}</p>
+        <p>${movie.release_date || "N/A"}</p>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+}
+</script>
+
+</body>
+</html>
