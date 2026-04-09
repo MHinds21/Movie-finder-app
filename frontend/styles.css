@@ -1,5 +1,4 @@
-<style>
-
+/* ===== GENERAL ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -61,7 +60,7 @@ body {
   background: #D22D2D;
 }
 
-#loginPage .error{
+#loginPage .error {
   color: white;
   margin-top: 10px;
 }
@@ -169,4 +168,84 @@ body {
   font-size: 14px;
   color: #ddd;
 }
-</style>
+
+/* ===== MOVIE DETAILS MODAL ===== */
+#moviePage .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(21, 43, 121, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Box */
+#moviePage .modal-content {
+  background: #2F4293;
+  padding: 25px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 20px rgba(254, 179, 3, 0.6);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Close Button */
+#moviePage .close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #FEB303;
+}
+
+#moviePage .close:hover {
+  color: #DD9404;
+}
+
+/* Modal Poster */
+#moviePage #modalPoster {
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Modal Text */
+#moviePage #modalTitle {
+  color: #FEB303;
+  margin-bottom: 10px;
+}
+
+#moviePage #modalRating {
+  color: #B9191E;
+  font-weight: bold;
+}
+
+#moviePage #modalDate {
+  color: #DD9404;
+}
+
+#moviePage #modalOverview {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #ddd;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
