@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Wizard</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body id="loginPage">
@@ -15,7 +15,7 @@
   <input type="text" id="username" placeholder="Username or Email"><br>
   <input type="password" id="password" placeholder="Password"><br>
   <button onclick="login()">Login</button>
-  <p id="errorMsg"></p>
+  <p id="errorMsg" class="error"></p>
 </div>
 
 <!--  MOVIE PAGE -->
@@ -26,84 +26,82 @@
     <button onclick="logout()">Logout</button>
   </div>
 
-  <!-- Search -->
   <div class="search-box">
     <input type="text" id="search" placeholder="Search movies...">
     <button onclick="searchMovies()">Search</button>
   </div>
 
-  <!-- Categories -->
   <div class="categories">
     <button onclick="getCategory('popular')">Popular</button>
     <button onclick="getCategory('top_rated')">Top Rated</button>
     <button onclick="getCategory('upcoming')">Upcoming</button>
   </div>
 
-  <!-- Movies -->
   <div id="movies" class="movie-grid"></div>
 
 </div>
 
 <script>
-// API KEY
-const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
+const API_KEY = "YOUR_TMDB_API_KEY";
 
-// ===== TMDB LINKS =====
+// ===== TMDB API LINKS =====
 // Search: https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=KEYWORD
 // Popular: https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
 // Top Rated: https://api.themoviedb.org/3/movie/top_rated?api_key=YOUR_API_KEY
 // Upcoming: https://api.themoviedb.org/3/movie/upcoming?api_key=YOUR_API_KEY
+// Genres: https://api.themoviedb.org/3/genre/movie/list?api_key=YOUR_API_KEY
+// Discover: https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&with_genres=GENRE_ID
+// Images: https://image.tmdb.org/t/p/w500 + poster_path
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-//  LOGIN
 function login() {
-  const user = document.getElementById('username').value;
-  const pass = document.getElementById('password').value;
-  const error = document.getElementById('errorMsg');
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const errorMsg = document.getElementById('errorMsg');
 
-  if (!user || !pass) {
-    error.textContent = "Enter login details";
+  errorMsg.textContent = "";
+
+  if (!username || !password) {
+    errorMsg.textContent = "Please enter both username and password.";
     return;
   }
 
-  // Simple login (demo)
-  document.body.id = "moviePage";
-  document.getElementById('loginSection').classList.add('hidden');
-  document.getElementById('movieSection').classList.remove('hidden');
+  // Demo login
+  if ((username === "test@example.com" || username === "test") && password === "1234") {
+    
+    //  SWITCH TO MOVIE PAGE
+    document.body.id = "moviePage";
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('movieSection').classList.remove('hidden');
 
-  getCategory('popular');
+    getCategory('popular');
+
+  } else {
+    errorMsg.textContent = "Invalid username or password.";
+  }
 }
 
-//  LOGOUT
 function logout() {
   location.reload();
 }
 
-//  SEARCH
 async function searchMovies() {
-  const query = document.getElementById("search").value;
+  const query = document.getElementById("search").value.trim();
+  if (!query) return;
 
-  const res = await fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
-  );
+  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
   const data = await res.json();
-
   displayMovies(data.results);
 }
 
-//  CATEGORY
 async function getCategory(type) {
-  const res = await fetch(
-    `${BASE_URL}/movie/${type}?api_key=${API_KEY}`
-  );
+  const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
-
   displayMovies(data.results);
 }
 
-//  DISPLAY MOVIES
 function displayMovies(movies) {
   const container = document.getElementById("movies");
   container.innerHTML = "";
@@ -131,3 +129,4 @@ function displayMovies(movies) {
 </script>
 
 </body>
+</html>
