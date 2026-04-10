@@ -9,7 +9,7 @@
 
 <body id="loginPage">
 
-<!--  LOGIN PAGE -->
+<!-- LOGIN PAGE -->
 <div id="loginSection" class="container">
   <h2>Login</h2>
   <input type="text" id="username" placeholder="Username or Email"><br>
@@ -18,7 +18,7 @@
   <p id="errorMsg" class="error"></p>
 </div>
 
-<!--  MOVIE PAGE -->
+<!-- MOVIE PAGE -->
 <div id="movieSection" class="hidden">
 
   <div class="topbar">
@@ -39,28 +39,26 @@
 
   <div id="movies" class="movie-grid"></div>
 
-  <!-- 🎬 MOVIE DETAILS MODAL -->
-<div id="movieModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-
-    <img id="modalPoster">
-    <h2 id="modalTitle"></h2>
-    <p id="modalRating"></p>
-    <p id="modalDate"></p>
-    <p id="modalOverview"></p>
+  <!-- MOVIE MODAL -->
+  <div id="movieModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modalPoster">
+      <h2 id="modalTitle"></h2>
+      <p id="modalRating"></p>
+      <p id="modalDate"></p>
+      <p id="modalOverview"></p>
+    </div>
   </div>
-</div>
 
 </div>
 
 <script>
 const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
-
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-// 🔐 LOGIN
+// LOGIN
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -77,19 +75,18 @@ function login() {
     document.body.id = "moviePage";
     document.getElementById('loginSection').classList.add('hidden');
     document.getElementById('movieSection').classList.remove('hidden');
-
     getCategory('popular');
   } else {
     errorMsg.textContent = "Invalid username or password.";
   }
 }
 
-// 🚪 LOGOUT
+// LOGOUT
 function logout() {
   location.reload();
 }
 
-// 🔍 SEARCH
+// SEARCH
 async function searchMovies() {
   const query = document.getElementById("search").value.trim();
   if (!query) return;
@@ -99,14 +96,14 @@ async function searchMovies() {
   displayMovies(data.results);
 }
 
-// 📂 CATEGORY
+// CATEGORY
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
   displayMovies(data.results);
 }
 
-// 🎬 DISPLAY MOVIES
+// DISPLAY MOVIES
 function displayMovies(movies) {
   const container = document.getElementById("movies");
   container.innerHTML = "";
@@ -129,12 +126,11 @@ function displayMovies(movies) {
     `;
 
     div.onclick = () => showDetails(movie);
-
     container.appendChild(div);
   });
 }
 
-// 🎬 SHOW DETAILS (MOVED OUTSIDE)
+// ✅ FIXED (moved outside)
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
@@ -150,7 +146,6 @@ function showDetails(movie) {
     movie.overview || "No description available.";
 }
 
-// ❌ CLOSE MODAL (ALSO OUTSIDE)
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }

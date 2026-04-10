@@ -67,7 +67,8 @@ body {
 
 /* ===== MOVIE PAGE ===== */
 #moviePage {
-  background: url('https://img.freepik.com/free-vector/christmas-stars-background_1048-7269.jpg?semt=ais_hybrid&w=740&q=80');
+  background: url('https://img.freepik.com/free-vector/christmas-stars-background_1048-7269.jpg') no-repeat center/cover;
+  min-height: 100vh;
 }
 
 /* Top bar */
@@ -124,6 +125,7 @@ body {
 
 #moviePage .categories button:hover {
   color: black;
+  background: #DD9404;
 }
 
 /* Movies Grid */
@@ -140,6 +142,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 #moviePage .movie:hover {
