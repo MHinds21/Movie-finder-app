@@ -1,6 +1,6 @@
 const CACHE_NAME = "movie-finder-v1";
 
-// Core app files (edit names to match yours)
+
 const urlsToCache = [
   "/",
   "/index.html",
@@ -9,7 +9,6 @@ const urlsToCache = [
   "/manifest.json"
 ];
 
-// INSTALL → cache files
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -18,7 +17,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// FETCH → serve cached files first (offline support)
+
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -27,7 +26,7 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// ACTIVATE → remove old caches
+
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
