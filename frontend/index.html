@@ -40,7 +40,7 @@
   <div id="movies" class="movie-grid"></div>
 
   <!-- MOVIE MODAL -->
-  <div id="movieModal" class="modal hidden">
+  <div id="movieModal" class="modal>
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <img id="modalPoster">
@@ -189,7 +189,7 @@ function displayMovies(movies) {
 
 /* ================= MODAL ================= */
 function showDetails(movie) {
-  document.getElementById("movieModal").classList.remove("hidden");
+  document.getElementById("movieModal").classList.add("active");
 
   document.getElementById("modalPoster").src =
     movie.poster_path
@@ -204,7 +204,7 @@ function showDetails(movie) {
 }
 
 function closeModal() {
-  document.getElementById("movieModal").classList.add("hidden");
+  document.getElementById("movieModal").classList.remove("active");
 }
 </script>
 
