@@ -90,6 +90,7 @@ body {
 /* ===== SEARCH ===== */
 #moviePage .search-box {
   display: flex;
+  width: 50%;
   gap: 10px;
   padding: 15px 20px;
   flex-wrap: wrap;
@@ -97,7 +98,7 @@ body {
 
 #moviePage .search-box input {
   flex: 1;
-  min-width: 200px;
+  min-width: 2cqw;
   padding: 12px;
   border-radius: 8px;
   border: none;
@@ -197,6 +198,7 @@ body {
   align-items: center;
   z-index: 1000;
   padding: 10px;
+  pointer-events: auto;
 }
 
 #moviePage.modal.active {
