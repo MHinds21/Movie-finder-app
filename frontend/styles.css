@@ -199,6 +199,10 @@ body {
   padding: 10px;
 }
 
+#moviePage.modal.hidden {
+  display: none;
+}
+
 /* Modal Box */
 #moviePage .modal-content {
   background: #2F4293;
