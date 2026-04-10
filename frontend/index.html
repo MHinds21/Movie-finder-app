@@ -27,7 +27,7 @@
   </div>
 
   <div class="search-box">
-    <input type="text" id="search" placeholder="Search movies...">
+    <input type="text" id="search" placeholder="Search like: funny highschool movie or drama, romance">
     <button onclick="searchMovies()">Search</button>
   </div>
 
@@ -58,7 +58,7 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-// LOGIN
+/* ================= LOGIN ================= */
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -81,32 +81,89 @@ function login() {
   }
 }
 
-// LOGOUT
+/* ================= LOGOUT ================= */
 function logout() {
   location.reload();
 }
 
-// SEARCH
+/* ================= SMART SEARCH ================= */
 async function searchMovies() {
-  const query = document.getElementById("search").value.trim();
+  const query = document.getElementById("search").value.toLowerCase().trim();
   if (!query) return;
 
-  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
-  const data = await res.json();
-  displayMovies(data.results);
+  // GENRES (TMDB IDs)
+  const genreMap = {
+    action: 28, adventure: 12, animation: 16, comedy: 35,
+    crime: 80, documentary: 99, drama: 18, family: 10751,
+    fantasy: 14, history: 36, horror: 27, music: 10402,
+    mystery: 9648, romance: 10749, scifi: 878,
+    thriller: 53, war: 10752, western: 37
+  };
+
+  // KEYWORDS → GENRES
+  const keywordMap = {
+    funny: "comedy",
+    love: "romance",
+    romantic: "romance",
+    school: "family",
+    highschool: "family",
+    scary: "horror",
+    sad: "drama",
+    emotional: "drama",
+    fighting: "action"
+  };
+
+  const words = query.replace(/,/g, " ").split(/\s+/);
+
+  let genreIDs = [];
+
+  words.forEach(word => {
+    if (genreMap[word]) {
+      genreIDs.push(genreMap[word]);
+    } else if (keywordMap[word]) {
+      genreIDs.push(genreMap[keywordMap[word]]);
+    }
+  });
+
+  genreIDs = [...new Set(genreIDs)];
+
+  let url;
+
+  if (genreIDs.length > 0) {
+    url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${genreIDs.join(",")}&sort_by=popularity.desc`;
+  } else {
+    url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`;
+  }
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    displayMovies(data.results);
+  } catch (err) {
+    console.error("Error fetching movies:", err);
+  }
 }
 
-// CATEGORY
+/* ================= CATEGORY ================= */
 async function getCategory(type) {
-  const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
-  const data = await res.json();
-  displayMovies(data.results);
+  try {
+    const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
+    const data = await res.json();
+    displayMovies(data.results);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-// DISPLAY MOVIES
+/* ================= DISPLAY ================= */
 function displayMovies(movies) {
   const container = document.getElementById("movies");
   container.innerHTML = "";
+
+  if (!movies || movies.length === 0) {
+    container.innerHTML = "<p>No movies found.</p>";
+    return;
+  }
 
   movies.forEach(movie => {
     const poster = movie.poster_path
@@ -130,7 +187,7 @@ function displayMovies(movies) {
   });
 }
 
-// ✅ FIXED (moved outside)
+/* ================= MODAL ================= */
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
