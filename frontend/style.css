@@ -48,19 +48,21 @@ button {
 
 /* ===== MOVIE PAGE ===== */
 #moviePage {
-  background: #152B79;
+  background: linear-gradient(180deg, #0b0f2a, #070a1a);
   min-height: 100vh;
 }
 
 /* Topbar */
+
 .topbar {
   display: flex;
   justify-content: space-between;
   padding: 15px 20px;
-  background: #FEB303;
+  background: transparent;
 }
 
 /* Search */
+
 .search-box {
   display: flex;
   gap: 10px;
@@ -69,8 +71,14 @@ button {
 }
 
 .search-box input {
-  flex: 1;
-  min-width: 200px;
+  background: #32174d;
+  color: white;
+  border-radius: 20px;
+}
+
+.search-box button {
+  border-radius: 20px;
+  background:#796878;
 }
 
 /* Categories */
@@ -83,26 +91,46 @@ button {
 }
 
 /* Movies */
+
+
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 15px;
   padding: 20px;
+  overflow-x: auto;
+}
+
+.movie-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.movie-grid::-webkit-scrollbar-thumb {
+  background: #32174d;
+  border-radius: 10px;
 }
 
 .movie {
-  background: #2F4293;
-  border-radius: 10px;
+  min-width: 160px;
+  height: 260px;
+  border-radius: 12px;
   overflow: hidden;
+  position: relative;
+  background:#563c5c ;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.7);
 }
 
 .movie img {
   width: 100%;
-  height: 240px;
+  height: 100%;
   object-fit: cover;
 }
-
 .movie-info {
   padding: 10px;
 }
@@ -179,30 +207,32 @@ button {
   color: #FEB303;
   cursor: pointer;
 }
-.movie {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
 }
 
-.movie h4 {
-  margin: 10px;
-  text-align: center;
+.overlay h4 {
+  font-size: 14px;
+  margin: 0;
 }
 
 .addBtn {
-  width: 90%;
-  margin: 10px auto 15px;
-  display: block;
-  padding: 10px;
-  background: #FEB303;
-  color: black;
-  font-weight: bold;
-  border-radius: 8px;
+  margin-top: 5px;
+  padding: 5px 8px;
+  font-size: 12px;
+  background: #6c5ce7;
+  border: none;
+  border-radius: 6px;
+  color: white;
 }
-
-
 .addBtn:hover {
-  background: #ffd34d;
+  background: #4c2882;
 }
+
+
