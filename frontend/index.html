@@ -142,11 +142,14 @@ function displayMovies(movies) {
     const div = document.createElement("div");
     div.className = "movie";
 
+   
     div.innerHTML = `
-      <img src="${poster}">
-      <h4>${movie.title}</h4>
-      <button class="addBtn">+ Watchlist</button>
-    `;
+  <img src="${poster}">
+  <div class="overlay">
+    <h4>${movie.title}</h4>
+    <button class="addBtn">+ Watchlist</button>
+  </div>
+`;
 
     /* FIX: prevent modal trigger */
     div.querySelector(".addBtn").addEventListener("click", (e) => {
