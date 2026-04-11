@@ -56,6 +56,11 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
+  window.onload = function () {
+  if (localStorage.getItem("user")) {
+    showMovies();
+  }
+};
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -64,26 +69,24 @@ function login() {
   errorMsg.textContent = "";
 
   if (!username || !password) {
-    errorMsg.textContent = "Please enter both username and password.";
+    errorMsg.textContent = "Enter all fields";
     return;
   }
 
-  // Demo login
-  if ((username === "test@example.com" || username === "test") && password === "1234") {
-    
-    //  SWITCH TO MOVIE PAGE
-    document.body.id = "moviePage";
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('movieSection').classList.remove('hidden');
+  
+  localStorage.setItem("user", username);
 
-    getCategory('popular');
-
-  } else {
-    errorMsg.textContent = "Invalid username or password.";
-  }
+  showMovies();
+}
+  function showMovies() {
+  document.body.id = "moviePage";
+  document.getElementById('loginSection').classList.add('hidden');
+  document.getElementById('movieSection').classList.remove('hidden');
+  getCategory('popular');
 }
 
 function logout() {
+  localStorage.removeItem("user");
   location.reload();
 }
 
