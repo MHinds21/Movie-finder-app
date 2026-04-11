@@ -1,0 +1,172 @@
+<style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== LOGIN PAGE ===== */
+#loginPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: 
+    linear-gradient(rgba(255,255,255,0.3), rgba(47,66,147,0.3)),
+    url('https://t3.ftcdn.net/jpg/04/85/87/10/360_F_485871039_1nvre3LHbspbtEDmXFZwkfkm3dbmBR7Z.jpg')
+    no-repeat center/cover;
+}
+
+#loginPage .container {
+  padding: 45px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 15px;
+  text-align: center;
+  width: 380px;
+  box-shadow: 0 0 25px rgba(185, 25, 30, 0.6);
+}
+
+#loginPage h2 {
+  color: #FEB303;
+  margin-bottom: 25px;
+}
+
+#loginPage input {
+  width: 90%;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+}
+
+#loginPage button {
+  padding: 12px 25px;
+  background: #B9191E;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#loginPage button:hover {
+  background: #D22D2D;
+}
+
+#loginPage .error{
+  color: white;
+  margin-top: 10px;
+}
+
+/* ===== MOVIE PAGE ===== */
+#moviePage {
+  background: url('https://img.freepik.com/free-vector/christmas-stars-background_1048-7269.jpg?semt=ais_hybrid&w=740&q=80');
+}
+
+/* Top bar */
+#moviePage .topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #FEB303;
+}
+
+#moviePage h1 {
+  color: white;
+}
+
+/* Search */
+#moviePage .search-box {
+  padding: 20px;
+}
+
+#moviePage input {
+  padding: 12px;
+  width: 60%;
+  border-radius: 8px;
+  border: none;
+}
+
+#moviePage .search-box button {
+  padding: 12px;
+  background: #B9191E;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#moviePage .search-box button:hover {
+  background: #D22D2D;
+}
+
+/* Categories */
+#moviePage .categories {
+  padding: 0 20px 20px;
+}
+
+#moviePage .categories button {
+  margin: 5px;
+  padding: 10px 15px;
+  background: #FEB303;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#moviePage .categories button:hover {
+  color: black;
+}
+
+/* Movies Grid */
+#moviePage .movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Movie Card */
+#moviePage .movie {
+  background: #2F4293;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#moviePage .movie:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 15px #FEB303;
+}
+
+/* Poster */
+#moviePage img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+/* Movie Info */
+#moviePage .movie-info {
+  padding: 10px;
+}
+
+#moviePage .movie-info h4 {
+  color: #FEB303;
+  margin: 5px 0;
+}
+
+#moviePage .movie-info p {
+  font-size: 14px;
+  color: #ddd;
+}
+</style>
