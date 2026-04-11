@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Wizard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body id="loginPage">
 
-<<<<<<< HEAD
 <!-- LOGIN PAGE -->
-=======
-<!--  LOGIN PAGE -->
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 <div id="loginSection" class="container">
   <h2>Login</h2>
   <input type="text" id="username" placeholder="Username or Email"><br>
@@ -22,11 +18,7 @@
   <p id="errorMsg" class="error"></p>
 </div>
 
-<<<<<<< HEAD
 <!-- MOVIE PAGE -->
-=======
-<!--  MOVIE PAGE -->
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 <div id="movieSection" class="hidden">
 
   <div class="topbar">
@@ -35,11 +27,7 @@
   </div>
 
   <div class="search-box">
-<<<<<<< HEAD
     <input type="text" id="search" placeholder="Search like: funny highschool movie or drama, romance">
-=======
-    <input type="text" id="search" placeholder="Search movies...">
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
     <button onclick="searchMovies()">Search</button>
   </div>
 
@@ -51,16 +39,11 @@
 
   <div id="movies" class="movie-grid"></div>
 
-<<<<<<< HEAD
   <!-- MOVIE MODAL -->
   <div id="movieModal" class="modal hidden">
     <div class="modal-content">
-      
       <span class="close" onclick="closeModal()">&times;</span>
-      <div class="modal-body">
       <img id="modalPoster">
-
-      <div class="modal-details">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
       <p id="modalDate"></p>
@@ -69,32 +52,13 @@
   </div>
 
 </div>
-=======
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
-</div>
 
 <script>
 const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
-<<<<<<< HEAD
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 /* LOGIN */
-=======
-
-// ===== TMDB API LINKS =====
-// Search: https://api.themoviedb.org/3/search/movie?api_key=YOUR_API_KEY&query=KEYWORD
-// Popular: https://api.themoviedb.org/3/movie/popular?api_key=YOUR_API_KEY
-// Top Rated: https://api.themoviedb.org/3/movie/top_rated?api_key=YOUR_API_KEY
-// Upcoming: https://api.themoviedb.org/3/movie/upcoming?api_key=YOUR_API_KEY
-// Genres: https://api.themoviedb.org/3/genre/movie/list?api_key=YOUR_API_KEY
-// Discover: https://api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&with_genres=GENRE_ID
-// Images: https://image.tmdb.org/t/p/w500 + poster_path
-
-const BASE_URL = "https://api.themoviedb.org/3";
-const IMG_URL = "https://image.tmdb.org/t/p/w500";
-
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -107,38 +71,21 @@ function login() {
     return;
   }
 
-<<<<<<< HEAD
   if ((username === "test@example.com" || username === "test") && password === "1234") {
     document.body.id = "moviePage";
     document.getElementById('loginSection').classList.add('hidden');
     document.getElementById('movieSection').classList.remove('hidden');
     getCategory('popular');
-=======
-  // Demo login
-  if ((username === "test@example.com" || username === "test") && password === "1234") {
-    
-    //  SWITCH TO MOVIE PAGE
-    document.body.id = "moviePage";
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('movieSection').classList.remove('hidden');
-
-    getCategory('popular');
-
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
   } else {
     errorMsg.textContent = "Invalid username or password.";
   }
 }
 
-<<<<<<< HEAD
 /* LOGOUT */
-=======
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 function logout() {
   location.reload();
 }
 
-<<<<<<< HEAD
 /* SMART SEARCH */
 async function searchMovies() {
   const query = document.getElementById("search").value.toLowerCase().trim();
@@ -199,46 +146,22 @@ async function getCategory(type) {
 }
 
 /* DISPLAY */
-=======
-async function searchMovies() {
-  const query = document.getElementById("search").value.trim();
-  if (!query) return;
-
-  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`);
-  const data = await res.json();
-  displayMovies(data.results);
-}
-
-async function getCategory(type) {
-  const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
-  const data = await res.json();
-  displayMovies(data.results);
-}
-
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 function displayMovies(movies) {
   const container = document.getElementById("movies");
   container.innerHTML = "";
 
-<<<<<<< HEAD
   if (!movies || movies.length === 0) {
     container.innerHTML = "<p>No movies found.</p>";
     return;
   }
 
-=======
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
   movies.forEach(movie => {
     const poster = movie.poster_path
       ? IMG_URL + movie.poster_path
       : "https://via.placeholder.com/300x450?text=No+Image";
 
     const div = document.createElement("div");
-<<<<<<< HEAD
     div.className = "movie";
-=======
-    div.classList.add("movie");
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
 
     div.innerHTML = `
       <img src="${poster}">
@@ -249,7 +172,6 @@ function displayMovies(movies) {
       </div>
     `;
 
-<<<<<<< HEAD
     div.addEventListener("click", () => showDetails(movie));
     container.appendChild(div);
   });
@@ -265,23 +187,11 @@ function showDetails(movie) {
       ? IMG_URL + movie.poster_path
       : "https://via.placeholder.com/300x450?text=No+Image";
 
-  document.getElementById("modalTitle").textContent =
-    movie.title || "No title available";
-
-  document.getElementById("modalRating").textContent =
-    movie.vote_average
-      ? "⭐ Rating: " + movie.vote_average
-      : "⭐ Rating: Not available";
-
-  document.getElementById("modalDate").textContent =
-    movie.release_date
-      ? "📅 Release: " + movie.release_date
-      : "📅 Release: Not available";
-
+  document.getElementById("modalTitle").textContent = movie.title;
+  document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
+  document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
   document.getElementById("modalOverview").textContent =
-    movie.overview && movie.overview.trim() !== ""
-      ? movie.overview
-      : "No description available.";
+    movie.overview || "No description available.";
 }
 
 function closeModal() {
@@ -291,12 +201,3 @@ function closeModal() {
 
 </body>
 </html>
-=======
-    container.appendChild(div);
-  });
-}
-</script>
-
-</body>
-</html>
->>>>>>> b662e7b8f39daffeaee0a839159d44aef3572655
