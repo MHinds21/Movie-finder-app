@@ -67,7 +67,7 @@ function login() {
   errorMsg.textContent = "";
 
   if (!username || !password) {
-    errorMsg.textContent = "Please enter both username and password.";
+    errorMsg.textContent = "Enter all fields";
     return;
   }
 
@@ -83,6 +83,7 @@ function login() {
 
 /* LOGOUT */
 function logout() {
+  localStorage.removeItem("user");
   location.reload();
 }
 
