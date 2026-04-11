@@ -158,18 +158,15 @@ function displayMovies(movies) {
   movies.forEach(movie => {
     const poster = movie.poster_path
       ? IMG_URL + movie.poster_path
-      : "https://via.placeholder.com/300x450?text=No+Image";
+      : "https://via.placeholder.com/300x450";
 
     const div = document.createElement("div");
     div.className = "movie";
 
     div.innerHTML = `
       <img src="${poster}">
-      <div class="movie-info">
-        <h4>${movie.title}</h4>
-        <p>⭐ ${movie.vote_average}</p>
-        <p>${movie.release_date || "N/A"}</p>
-      </div>
+      <h4>${movie.title}</h4>
+      <button class="addBtn">+ Watchlist</button>
     `;
 
     div.addEventListener("click", () => showDetails(movie));
