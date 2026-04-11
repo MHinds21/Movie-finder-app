@@ -42,8 +42,12 @@
   <!-- MOVIE MODAL -->
   <div id="movieModal" class="modal hidden">
     <div class="modal-content">
+      
       <span class="close" onclick="closeModal()">&times;</span>
+      <div class="modal-body">
       <img id="modalPoster">
+
+      <div class="modal-details">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
       <p id="modalDate"></p>
@@ -51,6 +55,7 @@
     </div>
   </div>
 
+</div>
 </div>
 
 <script>
@@ -187,11 +192,23 @@ function showDetails(movie) {
       ? IMG_URL + movie.poster_path
       : "https://via.placeholder.com/300x450?text=No+Image";
 
-  document.getElementById("modalTitle").textContent = movie.title;
-  document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
-  document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
+  document.getElementById("modalTitle").textContent =
+    movie.title || "No title available";
+
+  document.getElementById("modalRating").textContent =
+    movie.vote_average
+      ? "⭐ Rating: " + movie.vote_average
+      : "⭐ Rating: Not available";
+
+  document.getElementById("modalDate").textContent =
+    movie.release_date
+      ? "📅 Release: " + movie.release_date
+      : "📅 Release: Not available";
+
   document.getElementById("modalOverview").textContent =
-    movie.overview || "No description available.";
+    movie.overview && movie.overview.trim() !== ""
+      ? movie.overview
+      : "No description available.";
 }
 
 function closeModal() {
