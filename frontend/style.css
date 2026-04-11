@@ -179,3 +179,30 @@ button {
   color: #FEB303;
   cursor: pointer;
 }
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.movie h4 {
+  margin: 10px;
+  text-align: center;
+}
+
+.addBtn {
+  width: 90%;
+  margin: 10px auto 15px;
+  display: block;
+  padding: 10px;
+  background: #FEB303;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+
+.addBtn:hover {
+  background: #ffd34d;
+}
