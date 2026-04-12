@@ -144,14 +144,15 @@ body {
   padding: 5px 8px;
   font-size: 12px;
   background: #ffcc00;
+  color: black;
   border: none;
   border-radius: 6px;
-  color: white;
   cursor: pointer;
 }
 
 .addBtn:hover {
   background: #4c2882;
+  color: white;
 }
 
 .modal {
@@ -159,7 +160,6 @@ body {
   inset: 0;
   background: rgba(10, 14, 40, 0.8);
   backdrop-filter: blur(6px);
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -169,7 +169,8 @@ body {
   background: rgba(10, 14, 40, 0.9);
   padding: 20px;
   border-radius: 15px;
-  width: 60%;
+  width: 90%;
+  max-width: 700px;
   position: relative;
 }
 
