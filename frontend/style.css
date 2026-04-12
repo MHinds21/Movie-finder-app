@@ -238,11 +238,10 @@ button {
 
 
 .overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
 }
 
 .overlay h4 {
@@ -542,4 +541,17 @@ html {
 .watchlist-btn:hover {
   transform: scale(1.1);
   background: #4c2882;
+}
+.drop-panel {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2;
+  text-align: center;
+  color: white;
 }
