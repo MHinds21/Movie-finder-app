@@ -493,16 +493,3 @@ html {
 }
 
 
-#trailerContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-#trailerContainer iframe {
-  width: 100%;
-  max-width: 500px; 
-  height: 225px;
-  border-radius: 10px;
-  border: none;
-}
