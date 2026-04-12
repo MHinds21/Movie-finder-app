@@ -542,16 +542,3 @@ html {
   transform: scale(1.1);
   background: #4c2882;
 }
-.drop-panel {
-  position: fixed;
-  inset: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 2;
-  text-align: center;
-  color: white;
-}
