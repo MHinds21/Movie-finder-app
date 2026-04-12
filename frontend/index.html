@@ -117,57 +117,48 @@ function selectMenu(el, type) {
   }
 }
 
-  
-function login() {
-  const username = document.getElementById('username').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const errorMsg = document.getElementById('errorMsg');
-
-  errorMsg.textContent = "";
-
-  if (!username || !password) {
-    errorMsg.textContent = "Enter all fields";
-    return;
-  }
+function loginQuick() {
+  const username = prompt("Enter username:");
+  const password = prompt("Enter password:");
 
   if ((username === "test@example.com" || username === "test") && password === "1234") {
-
     localStorage.setItem("user", username);
-
-    updateAuthUI();
-    getCategory('popular');
-
+    alert("Login successful");
   } else {
-    errorMsg.textContent = "Invalid username or password.";
+    alert("Invalid login");
   }
 }
 
-  
+function loginQuick() {
+  const username = prompt("Enter username:");
+  const password = prompt("Enter password:");
+
+  if ((username === "test@example.com" || username === "test") && password === "1234") {
+    localStorage.setItem("user", username);
+    alert("Login successful");
+  } else {
+    alert("Invalid login");
+  }
+}
 
 function logout() {
   localStorage.removeItem("user");
-  updateAuthUI();
+  alert("Logged out");
 }
-function updateAuthUI() {
-  const user = localStorage.getItem("user");
 
-  const loginBox = document.getElementById("loginBox");
-  const logoutBox = document.getElementById("logoutBox");
+function toggleDropdown() {
+  document.getElementById("dropdown").classList.toggle("hidden");
+
+  const user = localStorage.getItem("user");
+  const userStatus = document.getElementById("userStatus");
 
   if (user) {
-    loginBox.classList.add("hidden");
-    logoutBox.classList.remove("hidden");
+    userStatus.textContent = "Logged in as " + user;
   } else {
-    loginBox.classList.remove("hidden");
-    logoutBox.classList.add("hidden");
+    userStatus.textContent = "Not logged in";
   }
 }
 
-updateAuthUI();
-
-  function toggleDropdown() {
-  document.getElementById("dropdown").classList.toggle("hidden");
-}
 
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
