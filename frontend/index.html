@@ -77,16 +77,25 @@
 
   <div id="movies" class="movie-grid"></div>
 
-  <div id="movieModal" class="modal hidden">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <img id="modalPoster">
-      <h2 id="modalTitle"></h2>
-      <p id="modalRating"></p>
-      <p id="modalDate"></p>
-      <p id="modalOverview"></p>
+<!-- Modal -->
+<div id="movieModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <!-- Movie Poster and Title Section (All writing next to Poster) -->
+    <div class="modal-header">
+      <div class="modal-poster-container">
+        <img id="modalPoster" class="modal-poster" alt="Movie Poster">
+      </div>
+      <div class="movie-info">
+        <h2 id="modalTitle"></h2>
+        <p id="modalRating" class="rating"></p>
+        <p id="modalDate"></p>
+        <p id="modalOverview"></p>
+      </div>
     </div>
   </div>
+</div>
 <footer class="footer">
   <div class="footer-overlay"></div>
 
