@@ -31,15 +31,15 @@ function login() {
   if ((username === "test" || username === "test@example.com") && password === "1234") {
     localStorage.setItem("user", username);
     updateAuthUI();
-  showToast("Login successful");
+  showToast("Login successful"); 
   } else {
-    errorMsg.textContent = "Invalid username or password";
+    showToast("Invalid username or password"); 
   }
 }
-
 function logout() {
   localStorage.removeItem("user");
   updateAuthUI();
+ 
   showToast("Logged out");
 }
 
