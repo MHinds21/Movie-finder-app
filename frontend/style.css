@@ -336,9 +336,6 @@ button {
   filter: blur(2px) brightness(0.7) contrast(1.1);
 }
 
-
-
-}
 .drop-panel {
   position: fixed;
   top: -100%;
