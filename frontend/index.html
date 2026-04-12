@@ -80,16 +80,19 @@
 <div id="movieModal" class="modal hidden">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    
-    
+
+    <!-- Trailer Section -->
     <div id="trailerContainer">
-      
+      <!-- Trailer video will be embedded here -->
+      <iframe id="trailerIframe" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    
- 
-    <img id="modalPoster" class="modal-poster" alt="Movie Poster">
-    
-   
+
+    <!-- Movie Poster Section -->
+    <div class="modal-poster-container">
+      <img id="modalPoster" class="modal-poster" alt="Movie Poster">
+    </div>
+
+    <!-- Movie Details Section -->
     <div class="movie-details">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
