@@ -491,6 +491,11 @@ html {
   border-radius: 6px;
   cursor: pointer;
 }
+.logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
 
 .error {
   color: red;
