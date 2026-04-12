@@ -4,20 +4,12 @@ const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 let currentMovie = null;
 let searchInput;
-let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 function selectMenu(el, type) {
-  document.querySelectorAll('.nav-item').forEach(item =>
-    item.classList.remove('active')
-  );
-
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   el.classList.add('active');
-
-  if (type === 'watchlist') {
-    showWatchlist();
-  } else {
-    getCategory(type);
-  }
+  if (type === 'watchlist') showWatchlist();
+  else getCategory(type);
 }
 
 function login() {
@@ -86,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("modalPlayBtn").onclick = (e) => {
     const title = document.getElementById("modalTitle").textContent;
-    window.location.href = `trailer.html?title=${encodeURIComponent(title)}`;
+    window.location.href = `trailer.html?id=${encodeURIComponent(title)}`;
   };
 });
 
@@ -112,16 +104,14 @@ function updateWatchlistButton() {
   const btn = document.getElementById("watchlistBtn");
   if (!btn || !currentMovie) return;
 
-  let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   const exists = watchlist.some(m => m.id === currentMovie.id);
 
-  btn.innerHTML = exists
-    ? '<i class="fas fa-minus"></i>'
-    : '<i class="fas fa-plus"></i>';
+  btn.innerHTML = exists ? '<i class="fas fa-minus"></i>' : '<i class="fas fa-plus"></i>';
 }
 
 function showWatchlist() {
-  let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   displayMovies(watchlist);
 }
 
@@ -131,14 +121,12 @@ async function searchMovies() {
 
   const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   const data = await res.json();
-
   displayMovies(data.results);
 }
 
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
-
   displayMovies(data.results);
 }
 
@@ -151,6 +139,8 @@ function displayMovies(movies) {
     return;
   }
 
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+
   movies.forEach(movie => {
     const poster = movie.poster_path
       ? IMG_URL + movie.poster_path
@@ -159,16 +149,13 @@ function displayMovies(movies) {
     const div = document.createElement("div");
     div.className = "movie";
 
-    const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
     const isSaved = watchlist.some(m => m.id === movie.id);
 
     div.innerHTML = `
       <img src="${poster}">
       <div class="overlay">
         <h4>${movie.title}</h4>
-        <button class="addBtn">
-          ${isSaved ? "− Watchlist" : "+ Watchlist"}
-        </button>
+        <button class="addBtn">${isSaved ? "− Watchlist" : "+ Watchlist"}</button>
       </div>
     `;
 
@@ -189,9 +176,7 @@ function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
   document.getElementById("modalPoster").src =
-    movie.poster_path
-      ? IMG_URL + movie.poster_path
-      : "https://via.placeholder.com/300x450";
+    movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
 
   document.getElementById("modalTitle").textContent = movie.title;
   document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
