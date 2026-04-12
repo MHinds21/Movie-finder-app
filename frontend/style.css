@@ -314,3 +314,57 @@ button {
   );
   z-index: -1;
 }
+.drop-panel {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+
+  animation: dropDown 1.2s ease forwards;
+}
+
+
+.drop-panel h1 {
+  font-size: 3rem;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.8);
+}
+
+
+.home-btn {
+  padding: 15px 45px;
+  font-size: 1.3rem;
+  background: #e50914;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  transform: scale(1.1);
+  background: #b00610;
+}
+
+
+@keyframes dropDown {
+  from {
+    top: -100%;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
