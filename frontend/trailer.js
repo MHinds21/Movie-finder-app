@@ -14,26 +14,25 @@ const backBtn = document.getElementById("backBtn");
 let trailerKey = "";
 let isMuted = true;
 
+function buildUrl() {
+  return `https://www.youtube.com/embed/${trailerKey}?autoplay=1&controls=1&mute=${isMuted ? 1 : 0}`;
+}
+
 async function loadTrailer() {
   if (!movieId) return;
 
   try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
-    );
-
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`);
     const data = await res.json();
 
-    const trailer = data.results.find(
-      v => v.type === "Trailer" && v.site === "YouTube"
-    );
+    const trailer = data.results.find(v => v.type === "Trailer" && v.site === "YouTube");
 
     if (!trailer) return;
 
     trailerKey = trailer.key;
+    iframe.src = buildUrl();
 
-    iframe.src = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&controls=1&mute=${isMuted ? 1 : 0}`;
-  } catch (error) {
+  } catch (e) {
     console.log("Failed to load trailer");
   }
 }
@@ -42,8 +41,7 @@ loadTrailer();
 
 playBtn.addEventListener("click", () => {
   if (!trailerKey) return;
-
-  iframe.src = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&controls=1&mute=${isMuted ? 1 : 0}`;
+  iframe.src = buildUrl();
 });
 
 stopBtn.addEventListener("click", () => {
@@ -57,8 +55,8 @@ soundBtn.addEventListener("click", () => {
     ? `<i class="fas fa-volume-mute"></i>`
     : `<i class="fas fa-volume-up"></i>`;
 
-  if (iframe.src) {
-    iframe.src = iframe.src.replace(/mute=\d/, `mute=${isMuted ? 1 : 0}`);
+  if (trailerKey) {
+    iframe.src = buildUrl();
   }
 });
 
