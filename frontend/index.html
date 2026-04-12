@@ -1,96 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Wizard</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
- 
-
-<body>
 <div id="movieSection">
-  
-    
-
   <div class="topbar">
-  <a href="homepage.html" class="back-arrow">
-  <i class="fas fa-chevron-left"></i>
-</a>
+    <a href="homepage.html" class="back-arrow">
+      <i class="fas fa-chevron-left"></i>
+    </a>
     <h1>🎬 Movie Wizard</h1>
-  <div class="profile-menu">
+    <div class="profile-menu">
+      <div class="profile-icon" onclick="toggleDropdown()">
+        <i class="fas fa-user"></i>
+      </div>
 
-  <div class="profile-icon" onclick="toggleDropdown()">
-    <i class="fas fa-user"></i>
-  </div>
+      <div id="dropdown" class="dropdown hidden">
+        <p id="userStatus">Not logged in</p>
 
-  <div id="dropdown" class="dropdown hidden">
+        <div id="loginBox">
+          <input type="text" id="username" placeholder="Username or Email">
+          <input type="password" id="password" placeholder="Password">
+          <p id="errorMsg" class="error"></p>
+          <button onclick="login()">Login</button>
+        </div>
 
-    <p id="userStatus">Not logged in</p>
-
-    
-    <div id="loginBox">
-      <input type="text" id="username" placeholder="Username or Email">
-      <input type="password" id="password" placeholder="Password">
-      <p id="errorMsg" class="error"></p>
-      <button onclick="login()">Login</button>
+        <div id="logoutBox" class="hidden">
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
     </div>
-
-    
-    <div id="logoutBox" class="hidden">
-      <button onclick="logout()">Logout</button>
-    </div>
-
   </div>
 
-</div>
+  <div class="search-box">
+    <form id="searchForm">
+      <div class="search-wrapper">
+        <i class="fas fa-magnifying-glass search-icon" id="searchIcon"></i>
+        <input 
+          type="text" 
+          id="search" 
+          placeholder="Search movies, drama, romance..." 
+        />
+      </div>
+    </form>
   </div>
-<div class="search-box">
-  <form id="searchForm">
 
-    <div class="search-wrapper">
-  <i class="fas fa-magnifying-glass search-icon" id="searchIcon"></i>
-
-  <input 
-    type="text" 
-    id="search" 
-    placeholder="Search movies, drama, romance..." 
-  />
-</div>
-  </form>
-</div>
-
- 
-
-</div>
-  
   <div class="navbar">
+    <div class="nav-item active" onclick="selectMenu(this, 'popular')">
+      <i class="fas fa-fire"></i>
+      <span>Popular</span>
+    </div>
 
-  <div class="nav-item active" onclick="selectMenu(this, 'popular')">
-    <i class="fas fa-fire"></i>
-    <span>Popular</span>
+    <div class="nav-item" onclick="selectMenu(this, 'top_rated')">
+      <i class="fas fa-star"></i>
+      <span>Top Rated</span>
+    </div>
+
+    <div class="nav-item" onclick="selectMenu(this, 'upcoming')">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Upcoming</span>
+    </div>
+
+    <div class="nav-item" onclick="selectMenu(this, 'watchlist')">
+      <i class="fas fa-bookmark"></i>
+      <span>Watchlist</span>
+    </div>
   </div>
 
-  <div class="nav-item" onclick="selectMenu(this, 'top_rated')">
-    <i class="fas fa-star"></i>
-    <span>Top Rated</span>
-  </div>
-
-  <div class="nav-item" onclick="selectMenu(this, 'upcoming')">
-    <i class="fas fa-calendar-alt"></i>
-    <span>Upcoming</span>
-  </div>
-
-  <div class="nav-item" onclick="selectMenu(this, 'watchlist')">
-    <i class="fas fa-bookmark"></i>
-    <span>Watchlist</span>
-  </div>
-
-</div>
-
-
- 
   <div id="movies" class="movie-grid"></div>
 
   <!-- MOVIE MODAL -->
@@ -104,11 +74,9 @@
       <p id="modalOverview"></p>
     </div>
   </div>
-  </div>
+</div>
 
-
-  
-    <footer class="footer">
+<footer class="footer">
   <div class="footer-overlay"></div>
   <div class="footer-content">
     <h2>🎬 Movie Wizard</h2>
@@ -116,7 +84,6 @@
     <p class="copy">© 2026 Movie Wizard</p>
   </div>
 </footer>
-
 </body>
 
 
