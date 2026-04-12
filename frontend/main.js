@@ -139,14 +139,11 @@ function displayMovies(movies) {
 
     container.appendChild(div);
   });
-}
-
-let currentMovieId = null;
 
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
-  currentMovieId = movie.id;
+
 
   document.getElementById("modalPoster").src =
     movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
