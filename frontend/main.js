@@ -79,15 +79,23 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 });
 
-function addToWatchlist(movie) {
+function toggleWatchlist(movie = currentMovie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-  if (!watchlist.some(m => m.id === movie.id)) {
-    watchlist.push(movie);
-    localStorage.setItem("watchlist", JSON.stringify(watchlist));
-  }
-  alert("Added to watchlist!");
-}
 
+  const exists = watchlist.some(m => m.id === movie.id);
+
+  if (exists) {
+    watchlist = watchlist.filter(m => m.id !== movie.id);
+    showToast("Removed from watchlist");
+  } else {
+    watchlist.push(movie);
+    showToast("Added to watchlist");
+  }
+
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
+
+  updateWatchlistButton();
+}
 function showWatchlist() {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   displayMovies(watchlist);
