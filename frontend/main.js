@@ -3,31 +3,35 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 let currentMovie = null;
-let searchInput = null;
+let searchInput;
 let currentList = [];
 
 function selectMenu(el, type) {
-  document.querySelectorAll(".nav-item").forEach(i => i.classList.remove("active"));
-  el.classList.add("active");
-
-  if (type === "watchlist") showWatchlist();
-  else getCategory(type);
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+  el.classList.add('active');
+  if (type === 'watchlist') {
+    showWatchlist();
+  } else {
+    getCategory(type);
+  }
 }
 
 function login() {
-  const u = username.value.trim();
-  const p = password.value.trim();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("errorMsg");
 
   errorMsg.textContent = "";
 
-  if (!u || !p) {
+  if (!username || !password) {
     errorMsg.textContent = "Enter all fields";
     return;
   }
 
-  if ((u === "test" || u === "test@example.com") && p === "1234") {
-    localStorage.setItem("user", u);
+  if ((username === "test" || username === "test@example.com") && password === "1234") {
+    localStorage.setItem("user", username);
     updateAuthUI();
+    alert("Login successful");
   } else {
     errorMsg.textContent = "Invalid username or password";
   }
@@ -36,18 +40,30 @@ function login() {
 function logout() {
   localStorage.removeItem("user");
   updateAuthUI();
+  alert("Logged out");
 }
 
 function updateAuthUI() {
   const user = localStorage.getItem("user");
 
-  loginBox.style.display = user ? "none" : "block";
-  logoutBox.style.display = user ? "block" : "none";
-  userStatus.textContent = user ? "Logged in as " + user : "Not logged in";
+  const loginBox = document.getElementById("loginBox");
+  const logoutBox = document.getElementById("logoutBox");
+  const userStatus = document.getElementById("userStatus");
+
+  if (user) {
+    loginBox.style.display = "none";
+    logoutBox.style.display = "block";
+    userStatus.textContent = "Logged in as " + user;
+  } else {
+    loginBox.style.display = "block";
+    logoutBox.style.display = "none";
+    userStatus.textContent = "Not logged in";
+  }
 }
 
 function toggleDropdown() {
-  dropdown.classList.toggle("hidden");
+  document.getElementById("dropdown").classList.toggle("hidden");
+  updateAuthUI();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -55,15 +71,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchInput = document.getElementById("search");
 
-  searchForm.addEventListener("submit", e => {
+  document.getElementById("searchForm").addEventListener("submit", e => {
     e.preventDefault();
     searchMovies();
   });
 
-  searchIcon.addEventListener("click", searchMovies);
-
-  getCategory("popular");
+  document.getElementById("searchIcon").addEventListener("click", searchMovies);
 });
+
+function toggleWatchlist(movie = currentMovie) {
+  if (!movie) return;
+
+  let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const exists = watchlist.some(m => m.id === movie.id);
+
+  if (exists) {
+    watchlist = watchlist.filter(m => m.id !== movie.id);
+    showToast("Removed from watchlist");
+  } else {
+    watchlist.push(movie);
+    showToast("Added to watchlist");
+  }
+
+  localStorage.setItem("watchlist", JSON.stringify(watchlist));
+
+  updateWatchlistButton();
+  displayMovies(currentList);
+}
+
+function updateWatchlistButton() {
+  const btn = document.getElementById("watchlistBtn");
+  if (!btn || !currentMovie) return;
+
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  const exists = watchlist.some(m => m.id === currentMovie.id);
+
+  btn.innerHTML = exists
+    ? '<i class="fas fa-minus"></i>'
+    : '<i class="fas fa-plus"></i>';
+}
+
+function showWatchlist() {
+  const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  currentList = watchlist;
+  displayMovies(watchlist);
+}
+
+async function searchMovies() {
+  const query = searchInput.value.trim();
+  if (!query) return alert("Type something to search");
+
+  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+  const data = await res.json();
+
+  currentList = data.results;
+  displayMovies(data.results);
+}
 
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
@@ -73,118 +136,101 @@ async function getCategory(type) {
   displayMovies(data.results);
 }
 
-async function searchMovies() {
-  const q = searchInput.value.trim();
-  if (!q) return;
-
-  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${q}`);
-  const data = await res.json();
-
-  currentList = data.results;
-  displayMovies(data.results);
-}
-
 function displayMovies(movies) {
-  const box = document.getElementById("movies");
-  box.innerHTML = "";
+  const container = document.getElementById("movies");
+  container.innerHTML = "";
+
+  if (!movies || movies.length === 0) {
+    container.innerHTML = "<p>No movies found.</p>";
+    return;
+  }
 
   const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
   movies.forEach(movie => {
-    const img = movie.poster_path ? IMG_URL + movie.poster_path : "";
+    const poster = movie.poster_path
+      ? IMG_URL + movie.poster_path
+      : "https://via.placeholder.com/300x450";
+
+    const isSaved = watchlist.some(m => m.id === movie.id);
 
     const div = document.createElement("div");
     div.className = "movie";
 
     div.innerHTML = `
-      <img src="${img}">
+      <img src="${poster}">
       <div class="overlay">
         <h4>${movie.title}</h4>
+        <button class="addBtn">
+          <i class="fas ${isSaved ? "fa-minus" : "fa-plus"}"></i>
+        </button>
       </div>
     `;
 
-    div.onclick = () => showDetails(movie);
+    div.querySelector(".addBtn").addEventListener("click", e => {
+      e.stopPropagation();
+      toggleWatchlist(movie);
+    });
 
-    box.appendChild(div);
+    div.addEventListener("click", () => showDetails(movie));
+
+    container.appendChild(div);
   });
 }
 
 function showDetails(movie) {
   currentMovie = movie;
 
-  movieModal.classList.remove("hidden");
+  document.getElementById("movieModal").classList.remove("hidden");
 
-  modalPoster.src = movie.poster_path ? IMG_URL + movie.poster_path : "";
-  modalTitle.textContent = movie.title;
-  modalRating.textContent = "⭐ " + movie.vote_average;
-  modalDate.textContent = movie.release_date;
-  modalOverview.textContent = movie.overview;
+  document.getElementById("modalPoster").src =
+    movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
 
-  updateWatchlistBtn();
+  document.getElementById("modalTitle").textContent = movie.title;
+  document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
+  document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
+  document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
+
+  updateWatchlistButton();
+
+  document.getElementById("modalPlayBtn").onclick = () => {
+    window.location.href = `trailer.html?id=${movie.id}`;
+  };
 }
 
 function closeModal() {
-  movieModal.classList.add("hidden");
+  document.getElementById("movieModal").classList.add("hidden");
 }
 
-function toggleWatchlist() {
-  if (!currentMovie) return;
+function showToast(msg) {
+  let toast = document.getElementById("toast");
 
-  let list = JSON.parse(localStorage.getItem("watchlist")) || [];
-
-  const exists = list.some(m => m.id === currentMovie.id);
-
-  if (exists) {
-    list = list.filter(m => m.id !== currentMovie.id);
-    toast("Removed from watchlist");
-  } else {
-    list.push(currentMovie);
-    toast("Added to watchlist");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.style.position = "fixed";
+    toast.style.bottom = "20px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.background = "#6c63ff";
+    toast.style.color = "white";
+    toast.style.padding = "10px 20px";
+    toast.style.borderRadius = "8px";
+    toast.style.zIndex = "9999";
+    toast.style.fontSize = "14px";
+    toast.style.opacity = "0";
+    toast.style.transition = "0.3s";
+    document.body.appendChild(toast);
   }
 
-  localStorage.setItem("watchlist", JSON.stringify(list));
-
-  updateWatchlistBtn();
-}
-
-function updateWatchlistBtn() {
-  const list = JSON.parse(localStorage.getItem("watchlist")) || [];
-  const exists = list.some(m => m.id === currentMovie.id);
-
-  watchlistBtn.innerHTML = exists
-    ? '<i class="fas fa-minus"></i>'
-    : '<i class="fas fa-plus"></i>';
-}
-
-function showWatchlist() {
-  const list = JSON.parse(localStorage.getItem("watchlist")) || [];
-  currentList = list;
-  displayMovies(list);
-}
-
-function toast(msg) {
-  let t = document.getElementById("toast");
-
-  if (!t) {
-    t = document.createElement("div");
-    t.id = "toast";
-    document.body.appendChild(t);
-  }
-
-  t.textContent = msg;
-
-  t.style.position = "fixed";
-  t.style.bottom = "20px";
-  t.style.left = "50%";
-  t.style.transform = "translateX(-50%)";
-  t.style.background = "#6c63ff";
-  t.style.color = "white";
-  t.style.padding = "10px 20px";
-  t.style.borderRadius = "8px";
-  t.style.zIndex = "9999";
-  t.style.opacity = "1";
+  toast.textContent = msg;
+  toast.style.opacity = "1";
 
   setTimeout(() => {
-    t.style.opacity = "0";
+    toast.style.opacity = "0";
   }, 1200);
 }
+
+window.onload = () => {
+  getCategory("popular");
+};
