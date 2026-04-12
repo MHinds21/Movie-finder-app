@@ -286,5 +286,61 @@ button {
   font-size: 12px;
   opacity: 0.6;
 }
+/* ===== HOME PAGE (VIDEO PREVIEW) ===== */
 
+/* Video background */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  pointer-events: none; 
+}
+
+
+.home-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
+
+
+.home-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.home-center h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+
+.home-btn {
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  background: #796878;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: #4c2882;
+}
 
