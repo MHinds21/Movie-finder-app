@@ -77,24 +77,30 @@
 
   <div id="movies" class="movie-grid"></div>
 
- <div id="movieModal" class="modal hidden">
+<div id="movieModal" class="modal hidden">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    
+  
     <div class="modal-left">
       <img id="modalPoster" class="modal-poster">
     </div>
     
     <div class="modal-right">
+     
+      <div id="trailerContainer">
+       
+      </div>
+    </div>
+    
+    <div class="movie-details">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
       <p id="modalDate"></p>
       <p id="modalOverview"></p>
-      
-      <div id="trailerContainer"></div>
     </div>
   </div>
 </div>
+  
 <footer class="footer">
   <div class="footer-overlay"></div>
 
