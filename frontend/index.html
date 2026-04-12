@@ -47,9 +47,8 @@
 </div>
   </div>
 <div class="search-box">
-
   <form id="searchForm">
-    
+
     <div class="search-icon" id="searchIcon">
       <i class="fas fa-magnifying-glass"></i>
     </div>
@@ -60,10 +59,7 @@
       placeholder="Search movies, drama, romance..." 
     />
 
-    <button type="submit">Search</button>
-
   </form>
-
 </div>
 
  
@@ -214,19 +210,25 @@ function showWatchlist() {
   displayMovies(watchlist);
 }
 
-const form = document.getElementById("searchForm");
-const searchInput = document.getElementById("search");
-const searchIcon = document.getElementById("searchIcon");
+let searchInput;
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateAuthUI();
+
+  const form = document.getElementById("searchForm");
+  searchInput = document.getElementById("search");
+  const searchIcon = document.getElementById("searchIcon");
+
+  
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    searchMovies();
+  });
 
 
-form.addEventListener("submit", function(e) {
-  e.preventDefault();
-  searchMovies();
-});
-
-
-searchIcon.addEventListener("click", function() {
-  searchMovies();
+  searchIcon.addEventListener("click", function() {
+    searchMovies();
+  });
 });
 
 async function searchMovies() {
