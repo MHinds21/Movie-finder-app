@@ -72,7 +72,6 @@
   <div id="movies" class="movie-grid"></div>
 
   <div id="movieModal" class="modal hidden">
-
     <div class="modal-content">
 
       <span class="close" onclick="closeModal()">&times;</span>
@@ -86,15 +85,26 @@
       <p id="modalDate"></p>
       <p id="modalOverview"></p>
 
-      <button id="watchlistBtn" onclick="toggleWatchlist()">
+      <button id="watchlistBtn" onclick="toggleWatchlist()" class="watchlist-btn">
         <i class="fas fa-plus"></i>
       </button>
 
     </div>
-
   </div>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-overlay"></div>
+
+  <div class="footer-content">
+    <h2>
+      <i class="fa-solid fa-hat-wizard"></i> Movie Wizard
+    </h2>
+    <p>© 2026 Movie Wizard. All rights reserved.</p>
+    <p>www.MovieWizard.com</p>
+  </div>
+</footer>
 
 <script src="main.js"></script>
 
