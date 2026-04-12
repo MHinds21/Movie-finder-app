@@ -515,3 +515,27 @@ html {
   text-decoration: none;
   z-index: 10;
 }
+
+.watchlist-btn {
+  margin-top: 15px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  background: #6c63ff;
+  color: white;
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s;
+}
+
+.watchlist-btn:hover {
+  transform: scale(1.1);
+  background: #4c2882;
+}
