@@ -3,10 +3,6 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100vh;
 }
 
 .hidden {
