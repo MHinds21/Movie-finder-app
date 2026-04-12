@@ -137,42 +137,7 @@ function displayMovies(movies) {
   });
 }
 
-function showDetails(movie) {
-  document.getElementById("movieModal").classList.remove("hidden");
 
-  document.getElementById("modalPoster").src =
-    movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
-
-  document.getElementById("modalTitle").textContent = movie.title;
-  document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
-  document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
-  document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
-}
-
-
-async function getTrailer(movieId) {
-  const res = await fetch(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`);
-  const data = await res.json();
-
-  const trailer = data.results.find(
-    vid => vid.type === "Trailer" && vid.site === "YouTube"
-  );
-
-  const container = document.getElementById("trailerContainer");
-
-  if (trailer) {
-    container.innerHTML = `
-      <iframe
-        src="https://www.youtube.com/embed/${trailer.key}"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
-    `;
-  } else {
-    container.innerHTML = "<p>No trailer available</p>";
-  }
-}
 
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
@@ -191,7 +156,7 @@ function showDetails(movie) {
 
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
-  document.getElementById("trailerContainer").innerHTML = "";
+
 }
 
 window.onload = () => {
