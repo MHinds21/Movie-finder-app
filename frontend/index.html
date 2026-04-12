@@ -78,35 +78,15 @@
   <div id="movies" class="movie-grid"></div>
 
 
-<div id="movieModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-
-    
-    <div class="modal-header">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modalPoster">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
-    </div>
-
-    <div class="modal-body">
-    
-      <div class="modal-poster-container">
-        <img id="modalPoster" class="modal-poster" alt="Movie Poster">
-      </div>
-
-     
-      <div class="movie-details">
-        <p id="modalDate"></p>
-        <p id="modalOverview"></p>
-      </div>
-
-  
-      <div id="trailerContainer">
-        <iframe id="trailerIframe" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
+      <p id="modalDate"></p>
+      <p id="modalOverview"></p>
     </div>
   </div>
-</div>
 <footer class="footer">
   <div class="footer-overlay"></div>
 
