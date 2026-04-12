@@ -153,6 +153,14 @@ function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }
 
+const modalPlayBtn = document.getElementById("modalPlayBtn");
+
+modalPlayBtn.addEventListener("click", () => {
+  if (!currentMovieId) return;
+
+  window.location.href = `trailer.html?movieId=${currentMovieId}`;
+});
 window.onload = () => {
   getCategory("popular");
 };
+
