@@ -23,7 +23,7 @@
 <div id="movieSection">
 
   <div class="topbar">
-    <a href="homepage.html">← Back</a>
+   <button onclick="goBack()" class="back-btn">← Back</button>
     <h1>🎬 Movie Wizard</h1>
     <button onclick="logout()">Logout</button>
   </div>
@@ -76,6 +76,9 @@ const IMG_URL = "https://image.tmdb.org/t/p/w500";
   getCategory('popular');
 };
 
+  function goBack() {
+  window.history.back();
+}
 
 function login() {
   const username = document.getElementById('username').value.trim();
