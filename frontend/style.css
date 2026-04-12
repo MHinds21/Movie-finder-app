@@ -177,7 +177,8 @@ button {
   background: rgba(50, 23, 77, 0.6);
   padding: 20px;
   border-radius: 15px;
-  width: 60%;
+  width: 80%; 
+  max-width: 900px; 
   display: flex; 
   justify-content: space-between; 
   position: relative;
@@ -198,6 +199,7 @@ button {
 
 .movie-details {
   flex: 1;
+  overflow: hidden;  
 }
 
 #movieSection {
@@ -499,7 +501,7 @@ html {
 
 #trailerContainer iframe {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px; 
   height: 225px;
   border-radius: 10px;
   border: none;
