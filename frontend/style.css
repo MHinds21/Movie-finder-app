@@ -163,7 +163,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(21, 43, 121, 0.9);
+   background: rgba(108, 99, 255, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,7 +174,7 @@ button {
 }
 
 .modal-content {
-  background: #2F4293;
+  background: #563c5c;
   padding: 20px;
   border-radius: 15px;
   width: 60%;
@@ -206,7 +206,7 @@ button {
 }
 
 #modalTitle {
-  color: #FEB303;
+  color: #7df9ff;
   font-size: 45px;
   font-weight: bold;
   margin-bottom: 10px;
