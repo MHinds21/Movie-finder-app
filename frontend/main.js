@@ -2,6 +2,7 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
+
 function selectMenu(el, type) {
   document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   el.classList.add('active');
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   searchIcon.addEventListener("click", searchMovies);
 });
 
+
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   if (!watchlist.some(m => m.id === movie.id)) {
@@ -102,6 +104,8 @@ async function getCategory(type) {
   const data = await res.json();
   displayMovies(data.results);
 }
+
+
 
 function displayMovies(movies) {
   const container = document.getElementById("movies");
@@ -137,8 +141,12 @@ function displayMovies(movies) {
   });
 }
 
+let currentMovieId = null;
+
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
+
+  currentMovieId = movie.id;
 
   document.getElementById("modalPoster").src =
     movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
@@ -153,14 +161,12 @@ function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }
 
-const modalPlayBtn = document.getElementById("modalPlayBtn");
-
-modalPlayBtn.addEventListener("click", () => {
-  if (!currentMovieId) return;
-
-  window.location.href = `trailer.html?movieId=${currentMovieId}`;
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("modalPlayBtn").addEventListener("click", () => {
+    if (!currentMovieId) return;
+    window.location.href = `trailer.html?id=${currentMovieId}`;
+  });
 });
-window.onload = () => {
   getCategory("popular");
 };
 
