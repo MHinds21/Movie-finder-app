@@ -9,19 +9,13 @@
 </head>
  
 
-<!-- <body id="loginPage">
 
-<!-- LOGIN PAGE -->
-<!-- <div id="loginSection" class="container">
-  <h2>Login</h2>
-  <input type="text" id="username" placeholder="Username or Email"><br>
-  <input type="password" id="password" placeholder="Password"><br>
-  <button onclick="login()">Login</button>
-  <p id="errorMsg" class="error"></p>
-</div> --> -->
-
-<!-- MOVIE PAGE -->
 <div id="movieSection">
+  
+    <div class="search-box">
+    <input type="text" id="search" placeholder="Search like: funny highschool movie or drama, romance">
+    <button onclick="searchMovies()">Search</button>
+  </div>
 
   <div class="topbar">
   <a href="homepage.html" class="back-arrow">
@@ -79,10 +73,7 @@
   </div>
 
 </div>
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Search like: funny highschool movie or drama, romance">
-    <button onclick="searchMovies()">Search</button>
-  </div>
+
 
  
   <div id="movies" class="movie-grid"></div>
