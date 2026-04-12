@@ -58,7 +58,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+ padding: 6px 20px;
 }
 
 .topbar h1 {
@@ -71,7 +71,8 @@ button {
 .search-box {
   display: flex;
   justify-content: center;
-  margin: 10px 0; 
+  margin: 0; 
+  padding: 5px 0; 
 }
 
 .search-box form {
@@ -79,11 +80,7 @@ button {
   max-width: 400px; 
 }
 
-.search-box {
-  background: transparent;
-  border: none;
-  padding: 0;
-}
+
 
 .search-box input {
   width: 100%;
