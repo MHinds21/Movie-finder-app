@@ -1,9 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Wizard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
 <div id="movieSection">
   <div class="topbar">
     <a href="homepage.html" class="back-arrow">
       <i class="fas fa-chevron-left"></i>
     </a>
+
     <h1>🎬 Movie Wizard</h1>
+
     <div class="profile-menu">
       <div class="profile-icon" onclick="toggleDropdown()">
         <i class="fas fa-user"></i>
@@ -30,11 +44,7 @@
     <form id="searchForm">
       <div class="search-wrapper">
         <i class="fas fa-magnifying-glass search-icon" id="searchIcon"></i>
-        <input 
-          type="text" 
-          id="search" 
-          placeholder="Search movies, drama, romance..." 
-        />
+        <input type="text" id="search" placeholder="Search movies, drama, romance...">
       </div>
     </form>
   </div>
@@ -63,7 +73,6 @@
 
   <div id="movies" class="movie-grid"></div>
 
-  <!-- MOVIE MODAL -->
   <div id="movieModal" class="modal hidden">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -84,28 +93,18 @@
     <p class="copy">© 2026 Movie Wizard</p>
   </div>
 </footer>
-</body>
-
 
 <script>
 const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-
 function selectMenu(el, type) {
-  document.querySelectorAll('.nav-item')
-    .forEach(item => item.classList.remove('active'));
-
+  document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   el.classList.add('active');
-
-  if (type === 'watchlist') {
-    showWatchlist();
-  } else {
-    getCategory(type);
-  }
+  if (type === 'watchlist') showWatchlist();
+  else getCategory(type);
 }
-
 
 function login() {
   const username = document.getElementById("username").value.trim();
@@ -119,7 +118,6 @@ function login() {
     return;
   }
 
-  
   if ((username === "test" || username === "test@example.com") && password === "1234") {
     localStorage.setItem("user", username);
     updateAuthUI();
@@ -160,16 +158,25 @@ function toggleDropdown() {
 
 document.addEventListener("DOMContentLoaded", () => {
   updateAuthUI();
+
+  const form = document.getElementById("searchForm");
+  searchInput = document.getElementById("search");
+  const searchIcon = document.getElementById("searchIcon");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    searchMovies();
+  });
+
+  searchIcon.addEventListener("click", searchMovies);
 });
 
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-
   if (!watchlist.some(m => m.id === movie.id)) {
     watchlist.push(movie);
     localStorage.setItem("watchlist", JSON.stringify(watchlist));
   }
-
   alert("Added to watchlist!");
 }
 
@@ -178,54 +185,20 @@ function showWatchlist() {
   displayMovies(watchlist);
 }
 
-let searchInput;
-
-document.addEventListener("DOMContentLoaded", () => {
-  updateAuthUI();
-
-  const form = document.getElementById("searchForm");
-  searchInput = document.getElementById("search");
-  const searchIcon = document.getElementById("searchIcon");
-
-  
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    searchMovies();
-  });
-
-
-  searchIcon.addEventListener("click", function() {
-    searchMovies();
-  });
-});
-
 async function searchMovies() {
   const query = searchInput.value.trim();
+  if (!query) return alert("Type something to search");
 
-  if (!query) {
-    alert("Type something to search");
-    return;
-  }
-
-  try {
-    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`;
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    displayMovies(data.results);
-  } catch (err) {
-    console.error("Search failed:", err);
-  }
+  const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+  const data = await res.json();
+  displayMovies(data.results);
 }
-
 
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
   displayMovies(data.results);
 }
-
 
 function displayMovies(movies) {
   const container = document.getElementById("movies");
@@ -237,24 +210,20 @@ function displayMovies(movies) {
   }
 
   movies.forEach(movie => {
-    const poster = movie.poster_path
-      ? IMG_URL + movie.poster_path
-      : "https://via.placeholder.com/300x450";
+    const poster = movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
 
     const div = document.createElement("div");
     div.className = "movie";
 
-   
     div.innerHTML = `
-  <img src="${poster}">
-  <div class="overlay">
-    <h4>${movie.title}</h4>
-    <button class="addBtn">+ Watchlist</button>
-  </div>
-`;
+      <img src="${poster}">
+      <div class="overlay">
+        <h4>${movie.title}</h4>
+        <button class="addBtn">+ Watchlist</button>
+      </div>
+    `;
 
-    
-    div.querySelector(".addBtn").addEventListener("click", (e) => {
+    div.querySelector(".addBtn").addEventListener("click", e => {
       e.stopPropagation();
       addToWatchlist(movie);
     });
@@ -265,30 +234,25 @@ function displayMovies(movies) {
   });
 }
 
-
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
   document.getElementById("modalPoster").src =
-    movie.poster_path
-      ? IMG_URL + movie.poster_path
-      : "https://via.placeholder.com/300x450";
+    movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
 
   document.getElementById("modalTitle").textContent = movie.title;
   document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
   document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
-  document.getElementById("modalOverview").textContent =
-    movie.overview || "No description available.";
+  document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
 }
 
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }
 
-  window.onload = () => {
-  getCategory('popular');
+window.onload = () => {
+  getCategory("popular");
 };
-
 </script>
 
 </body>
