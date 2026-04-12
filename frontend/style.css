@@ -238,10 +238,11 @@ button {
 
 
 .overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
 }
 
 .overlay h4 {
