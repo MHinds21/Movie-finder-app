@@ -173,11 +173,13 @@ body {
   width: 90%;
   max-width: 700px;
   position: relative;
+  text-align: center;
 }
 
 .modal-poster-wrapper {
   position: relative;
   width: 200px;
+  margin: 0 auto;
 }
 
 #modalPoster {
