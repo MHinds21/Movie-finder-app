@@ -151,7 +151,7 @@ function showDetails(movie) {
   document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
 
 
-  getTrailer(movie.id);
+  
 }
 
 function closeModal() {
