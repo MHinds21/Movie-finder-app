@@ -485,25 +485,16 @@ html {
   height: 65px;
   object-fit: contain;
 }
-.modal-flex {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-.modal-content {
-  max-width: 900px;
-}
-.modal-left {
-  flex: 1;
-}
-.modal-right {
+#trailerContainer {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
+
 #trailerContainer iframe {
   width: 100%;
-  height: 300px;
+  max-width: 400px;
+  height: 225px;
   border-radius: 10px;
+  border: none;
 }
