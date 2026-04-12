@@ -137,8 +137,6 @@ function displayMovies(movies) {
   });
 }
 
-
-
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
@@ -149,14 +147,10 @@ function showDetails(movie) {
   document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
   document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
   document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
-
-
-  
 }
 
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
-
 }
 
 window.onload = () => {
