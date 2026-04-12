@@ -4,12 +4,17 @@ const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
 let currentMovie = null;
 let searchInput;
+let currentList = [];
 
 function selectMenu(el, type) {
   document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
   el.classList.add('active');
-  if (type === 'watchlist') showWatchlist();
-  else getCategory(type);
+
+  if (type === 'watchlist') {
+    showWatchlist();
+  } else {
+    getCategory(type);
+  }
 }
 
 function login() {
@@ -65,24 +70,24 @@ function toggleDropdown() {
 document.addEventListener("DOMContentLoaded", () => {
   updateAuthUI();
 
-  const form = document.getElementById("searchForm");
   searchInput = document.getElementById("search");
-  const searchIcon = document.getElementById("searchIcon");
 
-  form.addEventListener("submit", e => {
+  document.getElementById("searchForm").addEventListener("submit", e => {
     e.preventDefault();
     searchMovies();
   });
 
-  searchIcon.addEventListener("click", searchMovies);
+  document.getElementById("searchIcon").addEventListener("click", searchMovies);
 
-  document.getElementById("modalPlayBtn").onclick = (e) => {
+  document.getElementById("modalPlayBtn").onclick = () => {
     const title = document.getElementById("modalTitle").textContent;
     window.location.href = `trailer.html?id=${encodeURIComponent(title)}`;
   };
 });
 
 function toggleWatchlist(movie = currentMovie) {
+  if (!movie) return;
+
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
   const exists = watchlist.some(m => m.id === movie.id);
@@ -98,6 +103,7 @@ function toggleWatchlist(movie = currentMovie) {
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
 
   updateWatchlistButton();
+  displayMovies(currentList);
 }
 
 function updateWatchlistButton() {
@@ -107,11 +113,14 @@ function updateWatchlistButton() {
   const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
   const exists = watchlist.some(m => m.id === currentMovie.id);
 
-  btn.innerHTML = exists ? '<i class="fas fa-minus"></i>' : '<i class="fas fa-plus"></i>';
+  btn.innerHTML = exists
+    ? '<i class="fas fa-minus"></i>'
+    : '<i class="fas fa-plus"></i>';
 }
 
 function showWatchlist() {
   const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+  currentList = watchlist;
   displayMovies(watchlist);
 }
 
@@ -121,12 +130,16 @@ async function searchMovies() {
 
   const res = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   const data = await res.json();
+
+  currentList = data.results;
   displayMovies(data.results);
 }
 
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
+
+  currentList = data.results;
   displayMovies(data.results);
 }
 
@@ -192,6 +205,35 @@ function showDetails(movie) {
 
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
+}
+
+function showToast(msg) {
+  let toast = document.getElementById("toast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.style.position = "fixed";
+    toast.style.bottom = "20px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.background = "#6c63ff";
+    toast.style.color = "white";
+    toast.style.padding = "10px 20px";
+    toast.style.borderRadius = "8px";
+    toast.style.zIndex = "9999";
+    toast.style.fontSize = "14px";
+    toast.style.transition = "0.3s";
+    toast.style.opacity = "0";
+    document.body.appendChild(toast);
+  }
+
+  toast.textContent = msg;
+  toast.style.opacity = "1";
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+  }, 1200);
 }
 
 window.onload = () => {
