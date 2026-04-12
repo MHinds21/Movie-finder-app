@@ -78,11 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("searchIcon").addEventListener("click", searchMovies);
-
-  document.getElementById("modalPlayBtn").onclick = () => {
-    const title = document.getElementById("modalTitle").textContent;
-    window.location.href = `trailer.html?id=${encodeURIComponent(title)}`;
-  };
 });
 
 function toggleWatchlist(movie = currentMovie) {
@@ -186,7 +181,9 @@ function displayMovies(movies) {
 function showDetails(movie) {
   currentMovie = movie;
 
-  document.getElementById("movieModal").classList.remove("hidden");
+  const modal = document.getElementById("movieModal");
+  modal.classList.remove("hidden");
+  modal.style.display = "flex";
 
   document.getElementById("modalPoster").src =
     movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
@@ -204,8 +201,17 @@ function showDetails(movie) {
 }
 
 function closeModal() {
-  document.getElementById("movieModal").classList.add("hidden");
+  const modal = document.getElementById("movieModal");
+  modal.classList.add("hidden");
+  modal.style.display = "none";
 }
+
+document.addEventListener("click", (e) => {
+  const modal = document.getElementById("movieModal");
+  if (e.target === modal) {
+    closeModal();
+  }
+});
 
 function showToast(msg) {
   let toast = document.getElementById("toast");
@@ -222,9 +228,8 @@ function showToast(msg) {
     toast.style.padding = "10px 20px";
     toast.style.borderRadius = "8px";
     toast.style.zIndex = "9999";
-    toast.style.fontSize = "14px";
-    toast.style.transition = "0.3s";
     toast.style.opacity = "0";
+    toast.style.transition = "0.3s";
     document.body.appendChild(toast);
   }
 
