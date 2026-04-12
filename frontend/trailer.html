@@ -12,7 +12,7 @@
 <body>
 
   <div class="topbar">
-    <a class="back-btn" id="backBtn">
+    <a class="back-btn" id="backBtn" href="javascript:history.back()">
       <i class="fas fa-chevron-left"></i>
     </a>
 
@@ -24,10 +24,12 @@
     </div>
   </div>
 
-  <div class="loading" id="loading">Loading trailer...</div>
-
   <div class="video-container" id="videoContainer">
-    <iframe id="trailerFrame" allow="autoplay; encrypted-media"></iframe>
+    <iframe
+      id="trailerFrame"
+      allow="autoplay; encrypted-media; fullscreen"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <script src="trailer.js"></script>
