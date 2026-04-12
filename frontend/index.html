@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Wizard</title>
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -13,22 +14,30 @@
 <div id="movieSection">
 
   <div class="topbar">
-    <div class="profile-icon" onclick="toggleDropdown()">
-      <i class="fas fa-user"></i>
-    </div>
+    <a href="homepage.html" class="back-arrow">
+      <i class="fas fa-chevron-left"></i>
+    </a>
 
-    <div id="dropdown" class="dropdown hidden">
-      <p id="userStatus">Not logged in</p>
+    <img class="logo" src="https://static.vecteezy.com/system/resources/previews/042/848/157/original/collection-of-wizard-head-logo-designs-isolated-png.png">
 
-      <div id="loginBox">
-        <input id="username" type="text">
-        <input id="password" type="password">
-        <p id="errorMsg"></p>
-        <button onclick="login()">Login</button>
+    <div class="profile-menu">
+      <div class="profile-icon" onclick="toggleDropdown()">
+        <i class="fas fa-user"></i>
       </div>
 
-      <div id="logoutBox" class="hidden">
-        <button onclick="logout()">Logout</button>
+      <div id="dropdown" class="dropdown hidden">
+        <p id="userStatus">Not logged in</p>
+
+        <div id="loginBox">
+          <input id="username" placeholder="Username">
+          <input id="password" type="password" placeholder="Password">
+          <p id="errorMsg"></p>
+          <button onclick="login()">Login</button>
+        </div>
+
+        <div id="logoutBox" class="hidden">
+          <button onclick="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </div>
@@ -36,8 +45,8 @@
   <div class="search-box">
     <form id="searchForm">
       <div class="search-wrapper">
-        <i class="fas fa-search" id="searchIcon"></i>
-        <input id="search" type="text">
+        <i class="fas fa-search search-icon" id="searchIcon"></i>
+        <input id="search" placeholder="Search movies...">
       </div>
     </form>
   </div>
@@ -63,11 +72,14 @@
   <div id="movies" class="movie-grid"></div>
 
   <div id="movieModal" class="modal hidden">
+
     <div class="modal-content">
 
       <span class="close" onclick="closeModal()">&times;</span>
 
-      <img id="modalPoster">
+      <div class="modal-poster-wrapper">
+        <img id="modalPoster">
+      </div>
 
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
@@ -79,6 +91,7 @@
       </button>
 
     </div>
+
   </div>
 
 </div>
