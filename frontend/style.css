@@ -317,27 +317,20 @@ button {
   filter: blur(2px) brightness(0.7) contrast(1.1);
 }
 
-.drop-panel {
-  position: fixed;
-  top: -100%;
-  left: 50%;
-  transform: translateX(-50%);
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 42px;
 
-  width: 100%;
-  height: 100vh;
+  width: 135px;
+  padding: 7px;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background: #111;
+  border-radius: 7px;
 
-  text-align: center;
-  gap: 20px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.35);
 
-  color: white;
-  z-index: 10;
-
-  animation: dropDown 1.2s ease forwards;
+  font-size: 11.5px;
 }
 .home-btn {
   display: inline-block;
