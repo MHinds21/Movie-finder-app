@@ -4,11 +4,6 @@ const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
 
 const iframe = document.getElementById("trailerFrame");
-
-const playBtn = document.getElementById("playBtn");
-const stopBtn = document.getElementById("stopBtn");
-const soundBtn = document.getElementById("soundBtn");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
 const backBtn = document.getElementById("backBtn");
 
 let trailerKey = "";
@@ -38,32 +33,6 @@ async function loadTrailer() {
 }
 
 loadTrailer();
-
-playBtn.addEventListener("click", () => {
-  if (!trailerKey) return;
-  iframe.src = buildUrl();
-});
-
-stopBtn.addEventListener("click", () => {
-  iframe.src = "";
-});
-
-soundBtn.addEventListener("click", () => {
-  isMuted = !isMuted;
-
-  soundBtn.innerHTML = isMuted
-    ? `<i class="fas fa-volume-mute"></i>`
-    : `<i class="fas fa-volume-up"></i>`;
-
-  if (trailerKey) {
-    iframe.src = buildUrl();
-  }
-});
-
-fullscreenBtn.addEventListener("click", () => {
-  const container = document.getElementById("videoContainer");
-  if (container.requestFullscreen) container.requestFullscreen();
-});
 
 backBtn.addEventListener("click", () => {
   window.history.back();
