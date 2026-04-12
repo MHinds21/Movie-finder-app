@@ -181,21 +181,32 @@ function displayMovies(movies) {
 function showDetails(movie) {
   currentMovie = movie;
 
-  document.getElementById("movieModal").classList.remove("hidden");
+  // Show the modal
+  const modal = document.getElementById("movieModal");
+  if (!modal) return; // Safety check
+  modal.classList.remove("hidden");
 
-  document.getElementById("modalPoster").src =
-    movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
+  // Update modal content
+  const poster = document.getElementById("modalPoster");
+  if (poster) {
+    poster.src = movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
+  }
 
-  document.getElementById("modalTitle").textContent = movie.title;
-  document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
-  document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
-  document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
+  const title = document.getElementById("modalTitle");
+  if (title) title.textContent = movie.title;
 
+  const rating = document.getElementById("modalRating");
+  if (rating) rating.textContent = "⭐ Rating: " + movie.vote_average;
+
+  const date = document.getElementById("modalDate");
+  if (date) date.textContent = "📅 Release: " + (movie.release_date || "N/A");
+
+  const overview = document.getElementById("modalOverview");
+  if (overview) overview.textContent = movie.overview || "No description available.";
+
+  // Update watchlist button
   updateWatchlistButton();
-
-  
 }
-
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }
