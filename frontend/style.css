@@ -444,17 +444,18 @@ html {
 .dropdown {
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 40px;
+
+  width: 120px;
+  padding: 6px;
 
   background: #111;
-  padding: 12px;
-  border-radius: 10px;
+  border-radius: 6px;
 
-  width: 180px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
 
-  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  font-size: 11px;
 }
-
 .hidden {
   display: none;
 }
