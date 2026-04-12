@@ -31,7 +31,7 @@ function login() {
   if ((username === "test" || username === "test@example.com") && password === "1234") {
     localStorage.setItem("user", username);
     updateAuthUI();
-    alert("Login successful");
+  showToast("Login successful");
   } else {
     errorMsg.textContent = "Invalid username or password";
   }
@@ -40,7 +40,7 @@ function login() {
 function logout() {
   localStorage.removeItem("user");
   updateAuthUI();
-  alert("Logged out");
+  showToast("Logged out");
 }
 
 function updateAuthUI() {
