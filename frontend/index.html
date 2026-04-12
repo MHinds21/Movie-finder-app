@@ -103,9 +103,6 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-  window.onload = () => {
-  getCategory('popular');
-};
 
 function selectMenu(el, type) {
   document.querySelectorAll('.nav-item')
@@ -144,7 +141,7 @@ function login() {
     errorMsg.textContent = "Invalid username or password.";
   }
 }
-}
+
   
 
 function logout() {
@@ -265,6 +262,11 @@ function showDetails(movie) {
 function closeModal() {
   document.getElementById("movieModal").classList.add("hidden");
 }
+
+  window.onload = () => {
+  getCategory('popular');
+};
+
 </script>
 
 </body>
