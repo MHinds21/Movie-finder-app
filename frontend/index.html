@@ -77,27 +77,33 @@
 
   <div id="movies" class="movie-grid"></div>
 
+
 <div id="movieModal" class="modal hidden">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
 
-    <!-- Trailer Section -->
-    <div id="trailerContainer">
-      <!-- Trailer video will be embedded here -->
-      <iframe id="trailerIframe" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-    <!-- Movie Poster Section -->
-    <div class="modal-poster-container">
-      <img id="modalPoster" class="modal-poster" alt="Movie Poster">
-    </div>
-
-    <!-- Movie Details Section -->
-    <div class="movie-details">
+    
+    <div class="modal-header">
       <h2 id="modalTitle"></h2>
       <p id="modalRating"></p>
-      <p id="modalDate"></p>
-      <p id="modalOverview"></p>
+    </div>
+
+    <div class="modal-body">
+    
+      <div class="modal-poster-container">
+        <img id="modalPoster" class="modal-poster" alt="Movie Poster">
+      </div>
+
+     
+      <div class="movie-details">
+        <p id="modalDate"></p>
+        <p id="modalOverview"></p>
+      </div>
+
+  
+      <div id="trailerContainer">
+        <iframe id="trailerIframe" width="100%" height="400" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 </div>
