@@ -193,9 +193,7 @@ function showDetails(movie) {
 
   updateWatchlistButton();
 
-  document.getElementById("modalPlayBtn").onclick = () => {
-    window.location.href = `trailer.html?id=${movie.id}`;
-  };
+  
 }
 
 function closeModal() {
