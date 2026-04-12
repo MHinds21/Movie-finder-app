@@ -448,38 +448,44 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ccc;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.profile-icon:hover {
-  background: #6c63ff;
   color: white;
 }
 
 .dropdown {
   position: absolute;
-  top: 50px;
   right: 0;
+  top: 50px;
   background: #111;
   padding: 15px;
   border-radius: 10px;
-  width: 160px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.dropdown button {
-  width: 100%;
-  margin-top: 10px;
-  padding: 8px;
-  border: none;
-  background: #6c63ff;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+  width: 200px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .hidden {
   display: none;
+}
+
+.dropdown input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+}
+
+.dropdown button {
+  width: 100%;
+  padding: 8px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }
