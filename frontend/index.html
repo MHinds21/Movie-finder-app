@@ -28,7 +28,18 @@
   <i class="fas fa-chevron-left"></i>
 </a>
     <h1>🎬 Movie Wizard</h1>
-    <button onclick="logout()">Logout</button>
+   <div class="profile-menu">
+
+  <div class="profile-icon" onclick="toggleDropdown()">
+    <i class="fas fa-user"></i>
+  </div>
+
+  <div id="dropdown" class="dropdown hidden">
+    <p id="userStatus">Not logged in</p>
+    <button onclick="handleAuth()">Login</button>
+  </div>
+
+</div>
   </div>
   
   <div class="navbar">
