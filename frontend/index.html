@@ -72,8 +72,11 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
+  window.onload = () => {
+  getCategory('popular');
+};
 
-/* LOGIN */
+
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -95,14 +98,14 @@ function login() {
     errorMsg.textContent = "Invalid username or password.";
   }
 }
+  
 
-/* LOGOUT */
 function logout() {
   localStorage.removeItem("user");
   location.reload();
 }
 
-/* WATCHLIST */
+
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
@@ -119,7 +122,7 @@ function showWatchlist() {
   displayMovies(watchlist);
 }
 
-/* SEARCH */
+
 async function searchMovies() {
   const query = document.getElementById("search").value.toLowerCase().trim();
   if (!query) return;
@@ -131,14 +134,14 @@ async function searchMovies() {
   displayMovies(data.results);
 }
 
-/* CATEGORY */
+
 async function getCategory(type) {
   const res = await fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}`);
   const data = await res.json();
   displayMovies(data.results);
 }
 
-/* DISPLAY MOVIES */
+
 function displayMovies(movies) {
   const container = document.getElementById("movies");
   container.innerHTML = "";
@@ -165,7 +168,7 @@ function displayMovies(movies) {
   </div>
 `;
 
-    /* FIX: prevent modal trigger */
+    
     div.querySelector(".addBtn").addEventListener("click", (e) => {
       e.stopPropagation();
       addToWatchlist(movie);
@@ -177,7 +180,7 @@ function displayMovies(movies) {
   });
 }
 
-/* MODAL */
+
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
