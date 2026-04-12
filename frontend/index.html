@@ -28,15 +28,29 @@
   <i class="fas fa-chevron-left"></i>
 </a>
     <h1>🎬 Movie Wizard</h1>
-   <div class="profile-menu">
+  <div class="profile-menu">
 
   <div class="profile-icon" onclick="toggleDropdown()">
     <i class="fas fa-user"></i>
   </div>
 
   <div id="dropdown" class="dropdown hidden">
+
     <p id="userStatus">Not logged in</p>
-    <button onclick="handleAuth()">Login</button>
+
+    
+    <div id="loginBox">
+      <input type="text" id="username" placeholder="Username or Email">
+      <input type="password" id="password" placeholder="Password">
+      <p id="errorMsg" class="error"></p>
+      <button onclick="login()">Login</button>
+    </div>
+
+    
+    <div id="logoutBox" class="hidden">
+      <button onclick="logout()">Logout</button>
+    </div>
+
   </div>
 
 </div>
@@ -117,48 +131,64 @@ function selectMenu(el, type) {
   }
 }
 
-function loginQuick() {
-  const username = prompt("Enter username:");
-  const password = prompt("Enter password:");
+// ==========================
+// AUTH SYSTEM (CLEAN)
+// ==========================
 
-  if ((username === "test@example.com" || username === "test") && password === "1234") {
-    localStorage.setItem("user", username);
-    alert("Login successful");
-  } else {
-    alert("Invalid login");
+function login() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("errorMsg");
+
+  errorMsg.textContent = "";
+
+  if (!username || !password) {
+    errorMsg.textContent = "Enter all fields";
+    return;
   }
-}
 
-function loginQuick() {
-  const username = prompt("Enter username:");
-  const password = prompt("Enter password:");
-
-  if ((username === "test@example.com" || username === "test") && password === "1234") {
+  // demo login check
+  if ((username === "test" || username === "test@example.com") && password === "1234") {
     localStorage.setItem("user", username);
+    updateAuthUI();
     alert("Login successful");
   } else {
-    alert("Invalid login");
+    errorMsg.textContent = "Invalid username or password";
   }
 }
 
 function logout() {
   localStorage.removeItem("user");
+  updateAuthUI();
   alert("Logged out");
 }
 
-function toggleDropdown() {
-  document.getElementById("dropdown").classList.toggle("hidden");
-
+function updateAuthUI() {
   const user = localStorage.getItem("user");
+
+  const loginBox = document.getElementById("loginBox");
+  const logoutBox = document.getElementById("logoutBox");
   const userStatus = document.getElementById("userStatus");
 
   if (user) {
+    loginBox.style.display = "none";
+    logoutBox.style.display = "block";
     userStatus.textContent = "Logged in as " + user;
   } else {
+    loginBox.style.display = "block";
+    logoutBox.style.display = "none";
     userStatus.textContent = "Not logged in";
   }
 }
 
+function toggleDropdown() {
+  document.getElementById("dropdown").classList.toggle("hidden");
+  updateAuthUI();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateAuthUI();
+});
 
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
