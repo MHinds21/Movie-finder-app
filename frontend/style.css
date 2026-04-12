@@ -283,7 +283,7 @@ button {
 .footer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(2, 6, 23, 0.75);
+  background: #32174d;
 }
 
 .footer-content {
