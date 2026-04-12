@@ -134,21 +134,43 @@ function login() {
   }
 
   if ((username === "test@example.com" || username === "test") && password === "1234") {
-    document.body.id = "moviePage";
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('movieSection').classList.remove('hidden');
+
+    localStorage.setItem("user", username);
+
+    updateAuthUI();
     getCategory('popular');
+
   } else {
     errorMsg.textContent = "Invalid username or password.";
   }
+}
 }
   
 
 function logout() {
   localStorage.removeItem("user");
-  location.reload();
+  updateAuthUI();
+}
+function updateAuthUI() {
+  const user = localStorage.getItem("user");
+
+  const loginBox = document.getElementById("loginBox");
+  const logoutBox = document.getElementById("logoutBox");
+
+  if (user) {
+    loginBox.classList.add("hidden");
+    logoutBox.classList.remove("hidden");
+  } else {
+    loginBox.classList.remove("hidden");
+    logoutBox.classList.add("hidden");
+  }
 }
 
+updateAuthUI();
+
+  function toggleDropdown() {
+  document.getElementById("dropdown").classList.toggle("hidden");
+}
 
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
