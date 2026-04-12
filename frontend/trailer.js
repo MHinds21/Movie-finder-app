@@ -1,4 +1,4 @@
-const apiKey = "YOUR_TMDB_API_KEY";
+const apiKey = "2e9d62d4c3a0513907a14e37f720fc6a";
 
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
@@ -31,6 +31,8 @@ async function loadTrailer() {
     if (!trailer) return;
 
     trailerKey = trailer.key;
+
+    iframe.src = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&controls=1&mute=${isMuted ? 1 : 0}`;
   } catch (error) {
     console.log("Failed to load trailer");
   }
