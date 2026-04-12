@@ -58,7 +58,12 @@ button {
   display: flex;
   justify-content: space-between;
   padding: 15px 20px;
-  background: transparent;
+  background-color: #FEB303;
+  color: #0b0f2a;
+}
+
+.topbar h1 {
+  margin: 0;
 }
 
 /* Search */
