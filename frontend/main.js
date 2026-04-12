@@ -143,8 +143,6 @@ function displayMovies(movies) {
 function showDetails(movie) {
   document.getElementById("movieModal").classList.remove("hidden");
 
-
-
   document.getElementById("modalPoster").src =
     movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
 
@@ -152,6 +150,10 @@ function showDetails(movie) {
   document.getElementById("modalRating").textContent = "⭐ Rating: " + movie.vote_average;
   document.getElementById("modalDate").textContent = "📅 Release: " + (movie.release_date || "N/A");
   document.getElementById("modalOverview").textContent = movie.overview || "No description available.";
+
+  document.getElementById("modalPlayBtn").onclick = () => {
+    window.location.href = `trailer.html?id=${movie.id}`;
+  };
 }
 
 function closeModal() {
