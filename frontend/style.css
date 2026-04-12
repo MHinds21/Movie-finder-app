@@ -171,7 +171,6 @@ button {
 
 .modal.hidden {
   display: none;
-}
 
 .modal-content {
   background: rgba(50, 23, 77, 0.6);
