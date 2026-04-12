@@ -1,10 +1,9 @@
 const apiKey = "YOUR_TMDB_API_KEY";
 
 const params = new URLSearchParams(window.location.search);
-const movieId = params.get("movieId");
+const movieId = params.get("id");
 
 const iframe = document.getElementById("trailerFrame");
-const loading = document.getElementById("loading");
 
 const playBtn = document.getElementById("playBtn");
 const stopBtn = document.getElementById("stopBtn");
@@ -16,10 +15,7 @@ let trailerKey = "";
 let isMuted = true;
 
 async function loadTrailer() {
-  if (!movieId) {
-    loading.innerText = "No movie selected";
-    return;
-  }
+  if (!movieId) return;
 
   try {
     const res = await fetch(
@@ -32,22 +28,19 @@ async function loadTrailer() {
       v => v.type === "Trailer" && v.site === "YouTube"
     );
 
-    if (!trailer) {
-      loading.innerText = "No trailer found";
-      return;
-    }
+    if (!trailer) return;
 
     trailerKey = trailer.key;
-    loading.style.display = "none";
-
   } catch (error) {
-    loading.innerText = "Failed to load trailer";
+    console.log("Failed to load trailer");
   }
 }
 
 loadTrailer();
 
 playBtn.addEventListener("click", () => {
+  if (!trailerKey) return;
+
   iframe.src = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&controls=1&mute=${isMuted ? 1 : 0}`;
 });
 
@@ -68,9 +61,10 @@ soundBtn.addEventListener("click", () => {
 });
 
 fullscreenBtn.addEventListener("click", () => {
-  document.getElementById("videoContainer").requestFullscreen();
+  const container = document.getElementById("videoContainer");
+  if (container.requestFullscreen) container.requestFullscreen();
 });
 
 backBtn.addEventListener("click", () => {
-  window.location.href = `index.html?open=${movieId}`;
+  window.history.back();
 });
