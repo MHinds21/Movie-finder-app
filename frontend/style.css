@@ -445,10 +445,13 @@ html {
   position: absolute;
   right: 0;
   top: 50px;
+
   background: #111;
-  padding: 15px;
+  padding: 12px;
   border-radius: 10px;
-  width: 200px;
+
+  width: 180px;
+
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
