@@ -14,7 +14,7 @@
 <div id="movieSection">
 
   <div class="topbar">
-    <a href="homepage.html" class="back-arrow">
+    <a href="index.html" class="back-arrow">
       <i class="fas fa-chevron-left"></i>
     </a>
 
@@ -70,28 +70,33 @@
   </div>
 
   <div id="movies" class="movie-grid"></div>
-  
-  <div id="movies" class="movie-grid"></div>
 
-<div id="movieModal" class="modal hidden">
-  <div class="modal-content">
+  <div id="movieModal" class="modal hidden">
+    <div class="modal-content">
 
-    <span class="close" onclick="closeModal()">&times;</span>
+      <span class="close" onclick="closeModal()">&times;</span>
 
-<div class="modal-poster-wrapper">
-  <img id="modalPoster">
+      <div class="modal-poster-wrapper">
+        <a id="modalPlayBtn" class="play-overlay" href="trailer.html">
+          <i class="fa-solid fa-play"></i>
+        </a>
+        <img id="modalPoster">
+      </div>
+
+      <h2 id="modalTitle"></h2>
+      <p id="modalRating"></p>
+      <p id="modalDate"></p>
+      <p id="modalOverview"></p>
+
+      <button id="watchlistBtn" onclick="toggleWatchlist()" class="watchlist-btn">
+        <i class="fas fa-plus"></i>
+      </button>
+
+    </div>
+  </div>
+
 </div>
-    <h2 id="modalTitle"></h2>
-    <p id="modalRating"></p>
-    <p id="modalDate"></p>
-    <p id="modalOverview"></p>
 
-    <button id="watchlistBtn" onclick="toggleWatchlist()" class="watchlist-btn">
-      <i class="fas fa-plus"></i>
-    </button>
-     </div>
-   </div>
-   </div>
 <footer class="footer">
   <div class="footer-overlay"></div>
 
