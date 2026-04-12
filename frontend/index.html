@@ -27,19 +27,36 @@
     <h1>🎬 Movie Wizard</h1>
     <button onclick="logout()">Logout</button>
   </div>
+  
+  <div class="navbar">
 
+  <div class="nav-item active" onclick="selectMenu(this, 'popular')">
+    <i class="fas fa-fire"></i>
+    <span>Popular</span>
+  </div>
+
+  <div class="nav-item" onclick="selectMenu(this, 'top_rated')">
+    <i class="fas fa-star"></i>
+    <span>Top Rated</span>
+  </div>
+
+  <div class="nav-item" onclick="selectMenu(this, 'upcoming')">
+    <i class="fas fa-calendar-alt"></i>
+    <span>Upcoming</span>
+  </div>
+
+  <div class="nav-item" onclick="selectMenu(this, 'watchlist')">
+    <i class="fas fa-bookmark"></i>
+    <span>Watchlist</span>
+  </div>
+
+</div>
   <div class="search-box">
     <input type="text" id="search" placeholder="Search like: funny highschool movie or drama, romance">
     <button onclick="searchMovies()">Search</button>
   </div>
 
-  <div class="categories">
-    <button onclick="getCategory('popular')">Popular</button>
-    <button onclick="getCategory('top_rated')">Top Rated</button>
-    <button onclick="getCategory('upcoming')">Upcoming</button>
-    <button onclick="showWatchlist()">My Watchlist</button>
-  </div>
-
+ 
   <div id="movies" class="movie-grid"></div>
 
   <!-- MOVIE MODAL -->
@@ -76,7 +93,20 @@ const IMG_URL = "https://image.tmdb.org/t/p/w500";
   getCategory('popular');
 };
 
+function selectMenu(el, type) {
+  document.querySelectorAll('.nav-item')
+    .forEach(item => item.classList.remove('active'));
 
+  el.classList.add('active');
+
+  if (type === 'watchlist') {
+    showWatchlist();
+  } else {
+    getCategory(type);
+  }
+}
+
+  
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
