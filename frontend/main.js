@@ -181,12 +181,12 @@ function displayMovies(movies) {
 function showDetails(movie) {
   currentMovie = movie;
 
-  // Show the modal
+
   const modal = document.getElementById("movieModal");
-  if (!modal) return; // Safety check
+  if (!modal) return; 
   modal.classList.remove("hidden");
 
-  // Update modal content
+  
   const poster = document.getElementById("modalPoster");
   if (poster) {
     poster.src = movie.poster_path ? IMG_URL + movie.poster_path : "https://via.placeholder.com/300x450";
@@ -204,7 +204,11 @@ function showDetails(movie) {
   const overview = document.getElementById("modalOverview");
   if (overview) overview.textContent = movie.overview || "No description available.";
 
-  // Update watchlist button
+  const playBtn = document.getElementById("modalPlayBtn");
+  playBtn.onclick = () => {
+  window.location.href = `trailer.html?id=${movie.id}`;
+};
+
   updateWatchlistButton();
 }
 function closeModal() {
