@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Wizard</title>
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -11,16 +12,13 @@
 <body>
 
 <div id="movieSection">
+
   <div class="topbar">
-    <a href="homepage.html" class="back-arrow">
+    <a href="#" class="back-arrow">
       <i class="fas fa-chevron-left"></i>
     </a>
 
-     
-  <img src="https://static.vecteezy.com/system/resources/previews/042/848/157/original/collection-of-wizard-head-logo-designs-isolated-png.png" 
-       class="logo">
-
-
+    <img class="logo" src="https://static.vecteezy.com/system/resources/previews/042/848/157/original/collection-of-wizard-head-logo-designs-isolated-png.png">
 
     <div class="profile-menu">
       <div class="profile-icon" onclick="toggleDropdown()">
@@ -31,9 +29,9 @@
         <p id="userStatus">Not logged in</p>
 
         <div id="loginBox">
-          <input type="text" id="username" placeholder="Username or Email">
-          <input type="password" id="password" placeholder="Password">
-          <p id="errorMsg" class="error"></p>
+          <input id="username" type="text" placeholder="Username">
+          <input id="password" type="password" placeholder="Password">
+          <p id="errorMsg"></p>
           <button onclick="login()">Login</button>
         </div>
 
@@ -48,75 +46,58 @@
     <form id="searchForm">
       <div class="search-wrapper">
         <i class="fas fa-magnifying-glass search-icon" id="searchIcon"></i>
-        <input type="text" id="search" placeholder="Search movies, drama, romance...">
+        <input id="search" type="text" placeholder="Search movies...">
       </div>
     </form>
   </div>
 
   <div class="navbar">
-    <div class="nav-item active" onclick="selectMenu(this, 'popular')">
-      <i class="fas fa-fire"></i>
-      <span>Popular</span>
+    <div class="nav-item active" onclick="selectMenu(this,'popular')">
+      <i class="fas fa-fire"></i><span>Popular</span>
     </div>
 
-    <div class="nav-item" onclick="selectMenu(this, 'top_rated')">
-      <i class="fas fa-star"></i>
-      <span>Top Rated</span>
+    <div class="nav-item" onclick="selectMenu(this,'top_rated')">
+      <i class="fas fa-star"></i><span>Top Rated</span>
     </div>
 
-    <div class="nav-item" onclick="selectMenu(this, 'upcoming')">
-      <i class="fas fa-calendar-alt"></i>
-      <span>Upcoming</span>
+    <div class="nav-item" onclick="selectMenu(this,'upcoming')">
+      <i class="fas fa-calendar"></i><span>Upcoming</span>
     </div>
 
-    <div class="nav-item" onclick="selectMenu(this, 'watchlist')">
-      <i class="fas fa-bookmark"></i>
-      <span>Watchlist</span>
+    <div class="nav-item" onclick="selectMenu(this,'watchlist')">
+      <i class="fas fa-bookmark"></i><span>Watchlist</span>
     </div>
   </div>
 
   <div id="movies" class="movie-grid"></div>
 
-<div id="movieModal" class="modal hidden">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
+  <div id="movieModal" class="modal hidden">
+    <div class="modal-content">
 
-    <div class="modal-poster-wrapper">
-      <img id="modalPoster">
-      <a id="modalPlayBtn" class="modal-play-btn" href="#">
-        <i class="fas fa-play"></i>
-      </a>
+      <span class="close" onclick="closeModal()">&times;</span>
+
+      <div class="modal-poster-wrapper">
+        <img id="modalPoster">
+        <a id="modalPlayBtn" class="modal-play-btn">
+          <i class="fas fa-play"></i>
+        </a>
+      </div>
+
+      <h2 id="modalTitle"></h2>
+      <p id="modalRating"></p>
+      <p id="modalDate"></p>
+      <p id="modalOverview"></p>
+
+      <button id="watchlistBtn" onclick="toggleWatchlist()">
+        <i class="fas fa-plus"></i>
+      </button>
+
     </div>
-
-    <h2 id="modalTitle"></h2>
-    <p id="modalRating"></p>
-    <p id="modalDate"></p>
-    <p id="modalOverview"></p>
-
-    <button id="watchlistBtn" onclick="toggleWatchlist()" class="watchlist-btn">
-      <i class="fas fa-plus"></i>
-    </button>
   </div>
-</div>
-<footer class="footer">
-  <div class="footer-overlay"></div>
 
-  <div class="footer-content">
-    <h2>
-      <i class="fa-solid fa-hat-wizard"></i> Movie Wizard
-    </h2>
-    <p>© 2026 Movie Wizard. All rights reserved.</p>
-    <p>www.MovieWizard.com</p>
-  </div></p>
-  </div>
-</footer>
 </div>
- 
 
-  
 <script src="main.js"></script>
-
-
 
 </body>
 </html>
