@@ -1,4 +1,4 @@
-/* ===== GENERAL ===== */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -9,7 +9,7 @@ body {
   display: none;
 }
 
-/* ===== LOGIN PAGE ===== */
+
 #loginPage {
   height: 100vh;
   display: flex;
@@ -46,13 +46,13 @@ button {
   cursor: pointer;
 }
 
-/* ===== MOVIE PAGE ===== */
+
 #moviePage {
   background: linear-gradient(180deg, #0b0f2a, #070a1a);
   min-height: 100vh;
 }
 
-/* Topbar */
+
 
 .topbar {
   display: flex;
@@ -61,7 +61,7 @@ button {
   background: transparent;
 }
 
-/* Search */
+
 
 .search-box {
   display: flex;
@@ -80,7 +80,6 @@ button {
   background:#796878;
 }
 
-/* Categories */
 .categories {
   padding: 10px 20px;
 }
@@ -89,7 +88,6 @@ button {
   margin: 5px;
 }
 
-/* Movies */
 
 
 .movie-grid {
@@ -134,7 +132,7 @@ button {
   padding: 10px;
 }
 
-/* Modal */
+
 .modal {
   position: fixed;
   top: 0;
@@ -242,7 +240,7 @@ button {
   justify-content: center;
 }
 
-/* Background image */
+
 .footer-bg {
   position: absolute;
   width: 100%;
@@ -252,7 +250,6 @@ button {
   left: 0;
 }
 
-/* Dark overlay (important for readability) */
 .footer-overlay {
   position: absolute;
   width: 100%;
@@ -286,61 +283,34 @@ button {
   font-size: 12px;
   opacity: 0.6;
 }
-/* ===== HOME PAGE (VIDEO PREVIEW) ===== */
 
-/* Video background */
 .video-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
+  overflow: hidden;
   z-index: -2;
 }
 
 .video-container iframe {
-  width: 100%;
-  height: 100%;
-  pointer-events: none; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.3);
+  width: 120vw;
+  height: 120vh;
+  pointer-events: none;
+
+  
+  filter: blur(2px) brightness(0.7) contrast(1.1);
 }
 
 
 .home-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
+  inset: 0;
+  background: radial-gradient(
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.75)
+  );
   z-index: -1;
 }
-
-
-.home-center {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.home-center h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-
-.home-btn {
-  padding: 15px 40px;
-  font-size: 1.5rem;
-  background: #796878;
-  color: white;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.home-btn:hover {
-  background: #4c2882;
-}
-
