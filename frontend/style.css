@@ -160,6 +160,7 @@ body {
   inset: 0;
   background: rgba(10, 14, 40, 0.8);
   backdrop-filter: blur(6px);
+  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -174,9 +175,43 @@ body {
   position: relative;
 }
 
-#modalPoster {
+.modal-poster-wrapper {
+  position: relative;
   width: 200px;
+}
+
+#modalPoster {
+  width: 100%;
   border-radius: 10px;
+  display: block;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.play-overlay i {
+  color: white;
+  font-size: 22px;
+  margin-left: 3px;
+}
+
+.play-overlay:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(108, 99, 255, 0.8);
 }
 
 #modalTitle {
