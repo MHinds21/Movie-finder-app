@@ -386,12 +386,11 @@ html {
 
 .back-btn {
   display: inline-block;
-  padding: 15px 45px;
-  font-size: 1.3rem;
-
+  padding: 12px;
   background: #796878;
-  color: black;
-  text-decoration: none;
-
-  border-radius: 10px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none; 
+  cursor: pointer;
 }
