@@ -6,39 +6,27 @@
   <title>Movie Wizard</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<<<<<<< HEAD
+  <!-- VIDEO BACKGROUND -->
+    <div class="video-container">
+    <iframe 
+      src="https://www.youtube.com/embed/mqqft2x_Aa4?autoplay=1&mute=1&controls=0&loop=1&playlist=mqqft2x_Aa4"
+      frameborder="0"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
 
-<body id="loginPage">
+  <!-- DARK OVERLAY -->
+  <div class="overlay"></div>
+
+  <!-- CENTER CONTENT -->
+  <div class="center">
+    <h1>🎬 Movie Wizard</h1>
+    <a href="movies.html" class="home-btn">HOME</a>
+  </div>
+<!-- <body id="loginPage">
 
 <!--  LOGIN PAGE -->
 <div id="loginSection" class="container">
-=======
-  <!-- VIDEO BACKGROUND -->
-<div class="video-container">
-  <iframe
-    src="https://www.youtube.com/embed/mqqft2x_Aa4?autoplay=1&mute=1&controls=0&loop=1&playlist=mqqft2x_Aa4"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-</div>
-
-<!-- DARK OVERLAY -->
-<div class="overlay"></div>
-
-<!-- CENTER BUTTON -->
-
-  <div class="drop-panel">
-  <h1>Welcome to Movie Wizard</h1>
-
-<a href="#movieSection" class="home-btn">HOME</a>
-</div>
-
-<!-- <body id="loginPage">
-
-<!-- LOGIN PAGE -->
-<!-- <div id="loginSection" class="container">
->>>>>>> 25a3b24c40b8ecc324777129b1a07e08da35faec
   <h2>Login</h2>
   <input type="text" id="username" placeholder="Username or Email"><br>
   <input type="password" id="password" placeholder="Password"><br>
@@ -46,13 +34,8 @@
   <p id="errorMsg" class="error"></p>
 </div>
 
-<<<<<<< HEAD
-<!--  MOVIE PAGE -->
-<div id="movieSection" class="hidden">
-=======
 <!-- MOVIE PAGE -->
-<div id="movieSection">
->>>>>>> 25a3b24c40b8ecc324777129b1a07e08da35faec
+<div id="movieSection" class="hidden">
 
   <div class="topbar">
     <h1>🎬 Movie Wizard</h1>
@@ -89,11 +72,7 @@ const API_KEY = "2e9d62d4c3a0513907a14e37f720fc6a";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-<<<<<<< HEAD
-=======
 
-/* LOGIN */
->>>>>>> 25a3b24c40b8ecc324777129b1a07e08da35faec
 function login() {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
