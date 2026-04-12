@@ -395,3 +395,35 @@ html {
   cursor: pointer;
   text-align: center;
 }
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  background: #0b0b1f;
+  padding: 15px 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #777;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.nav-item i {
+  font-size: 16px;
+}
+
+.nav-item:hover {
+  color: #a29bfe;
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.nav-item.active {
+  background: #6c63ff;
+  color: white;
+}
