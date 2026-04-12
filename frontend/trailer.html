@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trailer</title>
+  <title>Trailer Player</title>
 
   <link rel="stylesheet" href="trailer.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,12 +12,23 @@
 <body>
 
   <div class="topbar">
-    <a class="back-btn" href="javascript:history.back()">← Back</a>
+    <a class="back-btn" href="index.html">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+
+    <div class="controls">
+      <button id="playBtn"><i class="fas fa-play"></i></button>
+      <button id="stopBtn"><i class="fas fa-stop"></i></button>
+      <button id="soundBtn"><i class="fas fa-volume-mute"></i></button>
+      <button id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+    </div>
   </div>
 
   <div class="loading" id="loading">Loading trailer...</div>
 
-  <iframe id="trailerFrame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <div class="video-container" id="videoContainer">
+    <iframe id="trailerFrame" allow="autoplay; encrypted-media"></iframe>
+  </div>
 
   <script src="trailer.js"></script>
 
